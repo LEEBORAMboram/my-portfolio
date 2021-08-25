@@ -10,5 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CarAccidentMapper {
     public void insertCarAccidentInfo(CarAccidentVO vo);
     public void insertRegionalInfo(RegionalInfoVO vo);
-    public void inserttemperatureInfo(TemperatureVO vo);    
+    public void inserttemperatureInfo(TemperatureVO vo);
+    public List<RegionalInfoVO> selectSidoInfo(String region);    
 }

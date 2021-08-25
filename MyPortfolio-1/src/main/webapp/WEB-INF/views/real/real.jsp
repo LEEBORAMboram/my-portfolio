@@ -18,7 +18,22 @@
     <div class="container">
         <%@include file="/WEB-INF/views/includes/menu.jsp"%>
         <div class="dashboard_area">
-         
+            <div class="content_left">
+                <table class="real_traffic_information">
+                    <thead>
+                        <tr>
+                            <td>노선~구간</td>
+                            <td>통행 시간(초)</td>
+                            <td>통행 속도(시/km)</td>
+                        </tr>
+                    </thead>                 
+                </table>
+                <div class="real_traffic_pager_area">
+                    <button id="real_traffic_prev">&lt;</button>
+                    <span class="current">1</span> / <span class="total">100</span>
+                    <button id="real_traffic_next">&gt;</button>
+                </div>
+            </div>
     </div>
 </body>
 </html>

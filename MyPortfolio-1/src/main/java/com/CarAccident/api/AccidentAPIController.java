@@ -17,6 +17,7 @@ import com.CarAccident.service.CarAccidentService;
 import com.CarAccident.service.CarRegionalService;
 import com.CarAccident.vo.CarAccidentVO;
 import com.CarAccident.vo.CarSectionVO;
+import com.CarAccident.vo.RealTrafficVO;
 import com.CarAccident.vo.RegionalInfoVO;
 import com.CarAccident.vo.TemperatureVO;
 
@@ -24,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -421,6 +423,73 @@ public class AccidentAPIController {
         resultMap.put("status", true);
         return resultMap;
     }
+    
+    @GetMapping("/api/accident/underconstruction")
+    public Map<String, Object> getUnderconstruction() throws Exception {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/eventInfo");
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=7a5ffcb7e1bf4c368ed8cec6b125721f");
+        urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("eventType", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode("126.800000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("maxX", "UTF-8") + "=" + URLEncoder.encode("127.890000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("minY", "UTF-8") + "=" + URLEncoder.encode("34.900000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("maxY", "UTF-8") + "=" + URLEncoder.encode("35.100000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("getType", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+        System.out.println(urlBuilder.toString());
+
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        JSONObject bodyObj = (JSONObject) jsonObject.get("body");     
+        //JSONObject itemsObj = (JSONObject) bodyObj.get("items"); 
+
+        JSONArray itemsArr = bodyObj.getJSONArray("items");
+        for(int i=0; i<itemsArr.length(); i++) {
+            JSONObject obj = itemsArr.getJSONObject(i);
+            String roadtype = obj.getString("type");
+            String event_type = obj.getString("eventType");
+            String eventDetailType = obj.getString("eventDetailType");   
+            String startDt = obj.getString("startDate");
+            String roadname = obj.getString("roadName");
+            String roadDrcType = obj.getString("roadDrcType"); 
+            String lanesBlockType = obj.getString("lanesBlockType");
+            String endDt = obj.getString("endDate");
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            Date dt = formatter.parse(startDt);
+            Date ddt = formatter.parse(endDt);
+
+            CarSectionVO vo = new CarSectionVO();
+            vo.setRoadtype(roadtype);
+            vo.setEvent_type(event_type);
+            vo.setEventDetailType(eventDetailType);
+            vo.setStartDt(dt);
+            vo.setRoadname(roadname);
+            vo.setRoadDrcType(roadDrcType);
+            vo.setLanesBlockType(lanesBlockType);
+            vo.setEndDt(ddt);
+
+            service2.insertCarSection(vo);
+
+        }
+        resultMap.put("status", true);
+        return resultMap;
+    }
     @GetMapping("/api/accident/real_traffic")
     public Map<String, Object> getRealTraffic() throws Exception {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
@@ -453,29 +522,62 @@ public class AccidentAPIController {
         JSONArray itemsArr = jsonObject.getJSONArray("list");
         for(int i=0; i<itemsArr.length(); i++) {
             JSONObject obj = itemsArr.getJSONObject(i);
-            
+            String start_hour = obj.getString("stdHour");
+            String routeName = obj.getString("routeName");
+            String traffic_volume = obj.getString("trafficAmout");
+            String shareRatio = obj.getString("shareRatio");
+            String conzoneName = obj.getString("conzoneName");
+            String stdDate = obj.getString("stdDate");
+            String speed = obj.getString("speed");
+            String timeAvg = obj.getString("timeAvg");
 
-            // SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-            // Date dt = formatter.parse(createdate);
+            // DecimalFormat dFormatter = new DecimalFormat("##:##");
+            // String str_hour = dFormatter.format(start_hour);
 
-           
+            // 앞쪽 두 글자:뒤쪽 두 글자
+            String str_hour = start_hour.substring(0, 2)+":"+start_hour.substring(2, 4);
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Date dt2 = format.parse(stdDate);
+
+           RealTrafficVO vo = new RealTrafficVO();
+           vo.setStart_hour(str_hour);
+           vo.setRouteName(routeName);
+           vo.setTraffic_volume(traffic_volume);
+           vo.setShareRatio(shareRatio);
+           vo.setConzoneName(conzoneName);
+           vo.setStdDate(dt2);
+           vo.setSpeed(speed);
+           vo.setTimeAvg(timeAvg);
+
+           service2.insertRealTrafficInfo(vo);
         }
         resultMap.put("status", true);
         return resultMap;
     }
-    @GetMapping("/api/accident/underconstruction")
-    public Map<String, Object> getUnderconstruction() throws Exception {
+    @GetMapping("/api/realTrafficInfo/{date}")
+    public Map<String, Object> getRealTrafficInfo(@PathVariable String date) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-        StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/eventInfo");
-        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=7a5ffcb7e1bf4c368ed8cec6b125721f");
-        urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("eventType", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode("126.800000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("maxX", "UTF-8") + "=" + URLEncoder.encode("127.890000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("minY", "UTF-8") + "=" + URLEncoder.encode("34.900000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("maxY", "UTF-8") + "=" + URLEncoder.encode("35.100000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("getType", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+        if(date.equals("today")) {
+            List<RealTrafficVO> list = service2.selectRealTodayTrafficInfo();
+            resultMap.put("data", list);
+            return resultMap;
+        }
+            List<RealTrafficVO> list = service2.selectRealTrafficInfo(date);
+            resultMap.put("data", list);
+            return resultMap;
+        }
+        
+    @GetMapping("/api/accident/road_status")
+    public Map<String, Object> getRoad_Status() throws Exception {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15070272/v1/uddi:ae53200b-fa15-4722-926f-fa09ce07e9dd");
+        urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
+
         System.out.println(urlBuilder.toString());
 
         URL url = new URL(urlBuilder.toString());

@@ -14,15 +14,20 @@
     <insert id="insertRealTrafficInfo">
         INSERT INTO real_traffic
         (
-            roadName, startNodeid, endNodeid, speed, travelTime, createDt
+            start_hour, routeName, traffic_volume, shareRatio, conzoneName, stdDate, speed, timeAvg
         )
         VALUES
         (
-            #{roadName}, #{startNodeid}, #{endNodeid}, #{speed}, #{travelTime}, #{createDt}
+            #{start_hour}, #{routeName}, #{traffic_volume}, #{shareRatio}, #{conzoneName}, #{stdDate}, #{speed}, #{timeAvg}
         )
-
     </insert>
+    <select id="selectRealTrafficInfo" resultType="com.CarAccident.vo.RealTrafficVO">
+        select routeName,
+        #{start_hour}, #{conzoneName}, #{traffic_volume}
+        from real_traffic
+        where date_format(stdDate , "%Y-%m-%d") >= str_to_date(#{date},"%Y-%m-%d")
 
+    </select>
     <insert id="insertCarSection">
         INSERT INTO section_understruction
         (

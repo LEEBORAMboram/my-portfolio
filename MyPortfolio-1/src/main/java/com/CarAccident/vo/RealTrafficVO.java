@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class RealTrafficVO {
     private Integer seq;
-    private Date start_hour;
+    private String start_hour;
     private String routeName;
     private String traffic_volume;
     private String shareRatio;
@@ -15,4 +15,6 @@ public class RealTrafficVO {
     private Date stdDate;
     private String speed;
     private String timeAvg;
+
+    private String  str_hour;
 }

@@ -13,6 +13,10 @@
 }
 .content_area > div:last-child {margin-right: 20px;}
 .content_area {font-size: 25px; margin-right: 20px;}
+.content_right #date {position:absolute; right:0; top:0; 
+    font-family: "Roboto Sans KR", sans-serif;
+    font-weight: 700; font-size: 20px; width: 110px; padding: 12px; border: 0; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    outline: none; }
 
-.content_right {width: 500px; margin-right: 20px; height: 350px;}
 
+.Real_Traffic_Chart{width: 260px;}
