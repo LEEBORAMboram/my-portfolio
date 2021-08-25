@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CarAccident.mapper.CarRegionalMapper">
+     <select id="selectSidoInfo" resultType="com.CarAccident.vo.RegionalInfoVO">
+        select region_sido, 
+            sum(region_slightly) as region_slightly,
+            sum(region_injured) as region_injured,
+            sum(region_death) as region_death,
+            sum(region_seriously) as region_seriously
+        from accident_regional
+        group by region_sido;
+    </select>
+    <insert id="insertRealTrafficInfo">
+        INSERT INTO real_traffic
+        (
+            roadName, startNodeid, endNodeid, speed, travelTime, createDt
+        )
+        VALUES
+        (
+            #{roadName}, #{startNodeid}, #{endNodeid}, #{speed}, #{travelTime}, #{createDt}
+        )
+
+    </insert>
+
+    <insert id="insertCarSection">
+        INSERT INTO section_understruction
+        (
+            roadtype, event_type, eventDetailType, startDt, roadname, roadDrcType, lanesBlockType, endDt
+        )
+        VALUES
+        (
+            #{roadtype}, #{event_type}, #{eventDetailType}, #{startDt}, #{roadname}, #{roadDrcType}, #{lanesBlockType}, #{endDt}
+        )
+
+    </insert>
+
+</mapper>

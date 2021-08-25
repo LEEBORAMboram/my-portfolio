@@ -2,7 +2,10 @@
 .container > div {display: inline-block; vertical-align: top; font-size: 16px;}
 .left_menu {width: 260px;}
 .left_menu a {display: block;}
-#logo {font-family: "Roboto", sans-serif; color:#333; font-weight: 700;
+
+.region_select {width: 500px;}
+
+#logo {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
     font-size: 24px; text-decoration: none; text-align: center;
     padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border-radius: 5px; margin-bottom: 25px; 
@@ -20,3 +23,8 @@
 .main_menu a:hover::before {
     background-color: #333; 
 }
+
+.content_right {width: 700px; height: 300px; margin-left: 20px;}
+.content_right {background-color: #fff; border-radius:10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-sizing: border-box; padding: 20px;}
+.age_status {width:300px; font-size: 0;}

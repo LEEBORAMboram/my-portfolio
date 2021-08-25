@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.CarAccident.mapper.CarAccidentMapper">
-    <select id="selectCarAccidentInfo" resultType="com.CarAccident.vo.CarAccidentVO">
+    <insert id="insertCarAccidentInfo">
         INSERT INTO accident_info
             (
                 slightly, injured, death, gender, age, seriously
@@ -12,9 +12,9 @@
                 #{slightly}, #{injured}, #{death}, #{gender}, #{age}, #{seriously}
             ) 
             
-    </select>
+    </insert>
 
-    <select id="selectRegionalInfo" resultType="com.CarAccident.vo.RegionalInfoVO">
+    <insert id="insertRegionalInfo">
         INSERT INTO accident_regional
             (
                 region_slightly, region_month, region_injured, region_acc_cnt, region_death, region_sigungu, region_sido, region_seriously
@@ -24,17 +24,15 @@
                 #{region_slightly}, #{region_month}, #{region_injured}, #{region_acc_cnt}, #{region_death}, #{region_sigungu}, #{region_sido}, #{region_seriously}    
             )
 
-    </select>
-
-    <select id="selectTrafficVolumeInfo" resultType="com.CarAccident.vo.TrafficVolumeVO">
-        INSERT INTO traffic_volume
-            (
-                tcsName, trafficAmout, sumTime
-            )
-        VALUES
-            (
-                #{tcsName}, #{trafficAmout}, #{sumTime}
-            )
-    </select>
-
+    </insert>
+    <insert id="inserttemperatureInfo">
+    INSERT INTO temperature
+   (
+        week, dayDt, temperature
+    )
+    VALUES
+    (
+        #{week}, #{dayDt}, #{temperature}
+    )
+    </insert>
 </mapper>

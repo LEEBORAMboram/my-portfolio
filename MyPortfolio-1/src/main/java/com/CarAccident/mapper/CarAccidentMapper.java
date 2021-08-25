@@ -1,14 +1,14 @@
 package com.CarAccident.mapper;
+import java.util.List;
 
 import com.CarAccident.vo.CarAccidentVO;
 import com.CarAccident.vo.RegionalInfoVO;
-import com.CarAccident.vo.TrafficVolumeVO;
-
+import com.CarAccident.vo.TemperatureVO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CarAccidentMapper {
-    public void selectCarAccidentInfo(CarAccidentVO vo);
-    public void selectRegionalInfo(RegionalInfoVO vo);
-    public void selectTrafficVolumeInfo(TrafficVolumeVO vo);
+    public void insertCarAccidentInfo(CarAccidentVO vo);
+    public void insertRegionalInfo(RegionalInfoVO vo);
+    public void inserttemperatureInfo(TemperatureVO vo);    
 }

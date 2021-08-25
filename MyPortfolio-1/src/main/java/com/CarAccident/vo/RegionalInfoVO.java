@@ -13,4 +13,5 @@ public class RegionalInfoVO {
     private String region_sigungu;
     private String region_sido;
     private Integer region_seriously;
+
 }

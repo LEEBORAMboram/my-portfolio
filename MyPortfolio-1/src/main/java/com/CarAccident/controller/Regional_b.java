@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AccidentAgeController {
-    @GetMapping("/age") 
-    public String getAge() {
-        return "/age/age";
+public class Regional_b {
+    @GetMapping("/regional/real")
+    public String getRegionalReal() {
+        return "/real/real";
     }
 }

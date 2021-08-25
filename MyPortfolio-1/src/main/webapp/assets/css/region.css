@@ -1,0 +1,18 @@
+.car_accident {font-size: 20px; font-weight: 700;}
+
+.right_area {
+    width: 700px; height: 80px; margin-right: 20px;}
+
+.right_area > div {
+    width: 100%; margin-bottom: 20px; position:relative; 
+}
+.content_area > div {display: inline-block; vertical-align: top; text-align: center;
+    padding: 40px; box-sizing: border-box; background-color: #fff;
+    margin-right: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-family: "Noto Sans KR", sans-serif;
+}
+.content_area > div:last-child {margin-right: 20px;}
+.content_area {font-size: 25px; margin-right: 20px;}
+
+.content_right {width: 500px; margin-right: 20px; height: 350px;}
+

@@ -5,26 +5,34 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import com.CarAccident.service.CarAccidentService;
+import com.CarAccident.service.CarRegionalService;
 import com.CarAccident.vo.CarAccidentVO;
+import com.CarAccident.vo.CarSectionVO;
 import com.CarAccident.vo.RegionalInfoVO;
-import com.CarAccident.vo.TrafficVolumeVO;
+import com.CarAccident.vo.TemperatureVO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AccidentAPIController {
     @Autowired
     CarAccidentService service;
+    @Autowired
+    CarRegionalService service2;
 
     @GetMapping("/api/accident/victim2020")
     public Map<String, Object> getAccidentStatus() throws Exception {
@@ -34,9 +42,7 @@ public class AccidentAPIController {
         urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10000", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
-        // urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode(startDt, "UTF-8"));
-        // urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode(endDt, "UTF-8"));
-        //System.out.println(urlBuilder.toString());
+
 
         URL url = new URL(urlBuilder.toString());
         HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
@@ -83,31 +89,13 @@ public class AccidentAPIController {
             vo.setAge(age);
             vo.setSeriously(seriously);
 
-            service.selectCarAccidentInfo(vo);            
-            // System.out.println(slightly);
-            // System.out.println(injured);
-            // System.out.println(death);
-            // System.out.println(gender);
-            // System.out.println(age);
-            // System.out.println(seriously);
+            service.insertCarAccidentInfo(vo);            
             System.out.println("====================================");
         }
         resultMap.put("status", true);
 
         return resultMap;
     }
-    // @GetMapping("/api/accident/victim/{date}")
-    // public Map<String, Object> getAccidentVictim(@PathVariable String date) {
-    //     Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
-
-    //     if(date.equals("today")) {
-    //         List<CarAccidentVO> list = service.selectCarAccidentInfo();
-    //         resultMap.put("data", list);
-    //         return resultMap;
-    //     }
-
-    //     List<CarAccidentVO> list = service.sele
-    // }
     @GetMapping("/api/accident/victim2019")
     public Map<String, Object> getAccidentVictim() throws Exception {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
@@ -165,13 +153,7 @@ public class AccidentAPIController {
             vo.setAge(age);
             vo.setSeriously(seriously);
 
-            service.selectCarAccidentInfo(vo);            
-            // System.out.println(slightly);
-            // System.out.println(injured);
-            // System.out.println(death);
-            // System.out.println(gender);
-            // System.out.println(age);
-            // System.out.println(seriously);
+            service.insertCarAccidentInfo(vo);            
             System.out.println("====================================");
         }
         resultMap.put("status", true);
@@ -235,13 +217,7 @@ public class AccidentAPIController {
             vo.setAge(age);
             vo.setSeriously(seriously);
 
-            service.selectCarAccidentInfo(vo);            
-            // System.out.println(slightly);
-            // System.out.println(injured);
-            // System.out.println(death);
-            // System.out.println(gender);
-            // System.out.println(age);
-            // System.out.println(seriously);
+            service.insertCarAccidentInfo(vo);            
             System.out.println("====================================");
         }
         resultMap.put("status", true);
@@ -256,9 +232,6 @@ public class AccidentAPIController {
         urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10000", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
-        // urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode(startDt, "UTF-8"));
-        // urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode(endDt, "UTF-8"));
-        //System.out.println(urlBuilder.toString());
 
         URL url = new URL(urlBuilder.toString());
         HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
@@ -305,21 +278,28 @@ public class AccidentAPIController {
             vo.setAge(age);
             vo.setSeriously(seriously);
 
-            service.selectCarAccidentInfo(vo);            
-            // System.out.println(slightly);
-            // System.out.println(injured);
-            // System.out.println(death);
-            // System.out.println(gender);
-            // System.out.println(age);
-            // System.out.println(seriously);
+            service.insertCarAccidentInfo(vo);            
             System.out.println("====================================");
         }
         resultMap.put("status", true);
 
         return resultMap;
     }
+    @GetMapping("/api/accident/age/chart")
+    public Map<String, Object> getAgeInfo(@RequestParam String region){
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        
+        List<RegionalInfoVO> data = null;
+        data = service2.selectSidoInfo(region);
+            
+        resultMap.put("status", true);
+        resultMap.put("data", data);
+
+        return resultMap;
+    }
     @GetMapping("/api/accident/regional")
     public Map<String, Object> getAccidentRegional() throws Exception {
+    
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
         StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15070295/v1/uddi:66b562c4-1e81-494e-ac40-d5b9520eb898");
@@ -372,27 +352,81 @@ public class AccidentAPIController {
         vo.setRegion_sido(sido);  
         vo.setRegion_seriously(seriously);      
         
-        service.selectRegionalInfo(vo);
-        // System.out.println(slightly);
-        // System.out.println(month);
-        // System.out.println(injured);
-        // System.out.println(acc_cnt);
-        // System.out.println(death);
-        // System.out.println(sigungu);
-        // System.err.println(sido);
-        // System.out.println(seriously);
-        // System.out.println("=======================================================");
+        service.insertRegionalInfo(vo);
         }
         resultMap.put("status", true);
 
         return resultMap;
     }
-    @GetMapping("/api/accident/volume")
-    public Map<String, Object> getAccidentVolume() throws Exception {
+    @GetMapping("/api/accident/regional/chart")
+    public Map<String, Object> getRegionalInfo(@RequestParam String region){
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        
+        List<RegionalInfoVO> data = null;
+        data = service2.selectSidoInfo(region);
+            
+        resultMap.put("status", true);
+        resultMap.put("data", data);
+
+        return resultMap;
+    }
+    @GetMapping("/api/temperature")
+    public Map<String, Object> getTemperature() throws Exception {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        
+        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15084711/v1/uddi:e561881b-9501-4439-b030-b32ac3eb4831");
+        urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
+        //System.out.println(urlBuilder.toString());
+    
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        System.out.println(sb.toString());
+    
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        Integer cntObject = jsonObject.getInt("currentCount");
+        System.out.println("갯수 : "+cntObject);
+        
+        JSONArray dataArray = jsonObject.getJSONArray("data");
+        for(int i=0; i<dataArray.length(); i++) {
+            JSONObject obj = dataArray.getJSONObject(i);
+            String week = obj.getString("요일");
+            String dayDt = obj.getString("일자");
+            Float temperature = obj.getFloat("최저온도");   
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date dt = formatter.parse(dayDt);
+
+            TemperatureVO vo = new TemperatureVO();
+            vo.setWeek(week);
+            vo.setDayDt(dt);
+            vo.setTemperature(temperature);
+
+            service.inserttemperatureInfo(vo);
+        }
+        resultMap.put("status", true);
+        return resultMap;
+    }
+    @GetMapping("/api/accident/real_traffic")
+    public Map<String, Object> getRealTraffic() throws Exception {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-        StringBuilder urlBuilder = new StringBuilder("http://data.ex.co.kr/openapi/trafficapi/trafficAll");
-        urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=0756416339");
+        StringBuilder urlBuilder = new StringBuilder("http://data.ex.co.kr/openapi/odtraffic/trafficAmountByRealtime");
+        urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=9484350634");
         urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
         System.out.println(urlBuilder.toString());
 
@@ -411,25 +445,86 @@ public class AccidentAPIController {
         rd.close();
         conn.disconnect();
 
-        System.out.println(sb.toString());
-
+        //System.out.println(sb.toString());
         JSONObject jsonObject = new JSONObject(sb.toString());
         Integer cntObject = jsonObject.getInt("count");
         System.out.println("갯수 : "+cntObject);
-        
-        JSONArray dataArray = jsonObject.getJSONArray("trafficAll");
-        for(int i=0; i<dataArray.length(); i++) {
-            JSONObject obj = dataArray.getJSONObject(i);
-            String tcsName = obj.getString("tcsName");
-            Integer trafficAmout = obj.getInt("trafficAmout");
-            Integer sumTime = obj.getInt("sumTm");     
+ 
+        JSONArray itemsArr = jsonObject.getJSONArray("list");
+        for(int i=0; i<itemsArr.length(); i++) {
+            JSONObject obj = itemsArr.getJSONObject(i);
             
-            TrafficVolumeVO vo = new TrafficVolumeVO();
-            vo.setTcsName(tcsName);
-            vo.setTrafficAmout(trafficAmout);
-            vo.setSumTime(sumTime);
 
-            service.selectTrafficVolumeInfo(vo);
+            // SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+            // Date dt = formatter.parse(createdate);
+
+           
+        }
+        resultMap.put("status", true);
+        return resultMap;
+    }
+    @GetMapping("/api/accident/underconstruction")
+    public Map<String, Object> getUnderconstruction() throws Exception {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/eventInfo");
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=7a5ffcb7e1bf4c368ed8cec6b125721f");
+        urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("eventType", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode("126.800000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("maxX", "UTF-8") + "=" + URLEncoder.encode("127.890000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("minY", "UTF-8") + "=" + URLEncoder.encode("34.900000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("maxY", "UTF-8") + "=" + URLEncoder.encode("35.100000", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("getType", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+        System.out.println(urlBuilder.toString());
+
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        JSONObject bodyObj = (JSONObject) jsonObject.get("body");     
+        //JSONObject itemsObj = (JSONObject) bodyObj.get("items"); 
+
+        JSONArray itemsArr = bodyObj.getJSONArray("items");
+        for(int i=0; i<itemsArr.length(); i++) {
+            JSONObject obj = itemsArr.getJSONObject(i);
+            String roadtype = obj.getString("type");
+            String event_type = obj.getString("eventType");
+            String eventDetailType = obj.getString("eventDetailType");   
+            String startDt = obj.getString("startDate");
+            String roadname = obj.getString("roadName");
+            String roadDrcType = obj.getString("roadDrcType"); 
+            String lanesBlockType = obj.getString("lanesBlockType");
+            String endDt = obj.getString("endDate");
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            Date dt = formatter.parse(startDt);
+            Date ddt = formatter.parse(endDt);
+
+            CarSectionVO vo = new CarSectionVO();
+            vo.setRoadtype(roadtype);
+            vo.setEvent_type(event_type);
+            vo.setEventDetailType(eventDetailType);
+            vo.setStartDt(dt);
+            vo.setRoadname(roadname);
+            vo.setRoadDrcType(roadDrcType);
+            vo.setLanesBlockType(lanesBlockType);
+            vo.setEndDt(ddt);
+
+            service2.insertCarSection(vo);
+
         }
         resultMap.put("status", true);
         return resultMap;

@@ -11,4 +11,7 @@ public class CarAccidentVO {
     private String gender;
     private String age;
     private Integer seriously;
+
+    private String strDeath;
+    private String strInjured;
 }
