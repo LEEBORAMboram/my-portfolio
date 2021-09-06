@@ -22,20 +22,49 @@
         )
     </insert>
     <select id="selectRealTrafficInfo" resultType="com.CarAccident.vo.RealTrafficVO">
-        select routeName,
-        #{start_hour}, #{conzoneName}, #{traffic_volume}
-        from real_traffic
-        where date_format(stdDate , "%Y-%m-%d") >= str_to_date(#{date},"%Y-%m-%d")
+        select start_hour, traffic_volume, conzoneName from real_traffic
+        where start_hour like #{time} and 
+            <![CDATA[
+            date_format(stdDate , "%Y-%m-%d") <= str_to_date(#{date},"%Y-%m-%d")
+            and 
+            date_format(stdDate , "%Y-%m-%d") >  date_sub(str_to_date(#{date},"%Y-%m-%d"), interval 5 day)
+            ]]>
+        group by conzoneName order by start_hour desc
+    </select>
+    <select id ="selectOption"  resultType="com.CarAccident.vo.RealTrafficVO">
+        select #{name}, conzoneName from real_traffic
+        group by conzoneName
+    </select>
 
+
+    <select id="selectSections" resultType="com.CarAccident.vo.RealTrafficVO">
+        select distinct routeName like #{name} and conzoneName like #{specificname} from real_traffic
     </select>
     <insert id="insertCarSection">
-        INSERT INTO section_understruction
+        INSERT INTO accident_section
         (
-            roadtype, event_type, eventDetailType, startDt, roadname, roadDrcType, lanesBlockType, endDt
+            road_type, eventType, eventDetailType, startDate, roadName, roadDrcType, lanesBlockType, endDt
         )
         VALUES
         (
-            #{roadtype}, #{event_type}, #{eventDetailType}, #{startDt}, #{roadname}, #{roadDrcType}, #{lanesBlockType}, #{endDt}
+            #{road_type}, #{eventType}, #{eventDetailType}, #{startDate}, #{roadName}, #{roadDrcType}, #{lanesBlockType}, #{endDt}
+        )
+
+    </insert>
+
+    <select id="selectRealConstrutionInfo" resultType="com.CarAccident.vo.CarSectionVO">
+        select * from accident_section
+        where date_format(startDate , "%Y-%m-%d") >= str_to_date(#{date}, "%Y-%m-%d")
+    </select>
+
+    <insert id="insertRoadRiskIndex">
+        INSERT INTO roadriskindex
+        (
+            road_index, line_string, anals_value, anals_grd, highway, highway_section
+        )
+        VALUES
+        (
+             #{road_index}, #{line_string}, #{anals_value}, #{anals_grd}, #{highway}, #{highway_section}
         )
 
     </insert>

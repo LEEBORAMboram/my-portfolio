@@ -1,0 +1,29 @@
+.left_menu a {display: block;}
+
+.dashboard_area {width: 800px; height: 900px; margin-left: 30px;}
+
+#logo {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
+    font-size: 0; text-decoration: none; text-align: center;
+    padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 5px; margin-bottom: 25px; 
+}
+ul li {list-style-type: none; float:left; margin-left: 5px;}
+
+.main_menu a {
+    overflow: hidden;
+    font-size: 15px; font-family: "Roboto", sans-serif; text-decoration: none; background-color: #fff;
+    color: #333; font-weight: 500; padding: 15px; margin-bottom: 15px;
+    border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.main_menu a span {font-size: 13px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;}
+
+/* 글 */
+.content_right {font-size: 20px; width: 400px; height: 200px; margin-right: 20px; line-height: 1.5;
+    position:absolute ; right: 200px; top: 200px; display: inline-block;
+}
+
+.dashboard_content {box-sizing: border-box; padding:0; padding: 10px; font-size: 0;}
+.dashboard_content > div {display: inline-block;vertical-align: top;}
+
+.content_left2{font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: 13PX;}
+.content_right2{font-family: "Noto Sans KR", sans-serif; font-weight: 300; font-size: 13PX;}

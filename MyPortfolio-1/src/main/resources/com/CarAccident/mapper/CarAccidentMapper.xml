@@ -27,12 +27,12 @@
     </insert>
     <insert id="inserttemperatureInfo">
     INSERT INTO temperature
-   (
-        week, dayDt, temperature
-    )
-    VALUES
     (
-        #{week}, #{dayDt}, #{temperature}
+        rainfall, wind, temp, tm
     )
+    VALUES(
+         #{rainfall}, #{wind}, #{temp}, #{tm}
+    )
+
     </insert>
 </mapper>

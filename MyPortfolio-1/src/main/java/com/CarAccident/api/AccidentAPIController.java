@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.CarAccident.service.CarAccidentService;
 import com.CarAccident.service.CarRegionalService;
+import com.CarAccident.service.TheOthersService;
 import com.CarAccident.vo.CarAccidentVO;
 import com.CarAccident.vo.CarSectionVO;
 import com.CarAccident.vo.RealTrafficVO;
@@ -28,6 +31,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 @RestController
 public class AccidentAPIController {
@@ -35,6 +42,8 @@ public class AccidentAPIController {
     CarAccidentService service;
     @Autowired
     CarRegionalService service2;
+    @Autowired
+    TheOthersService service3;
 
     @GetMapping("/api/accident/victim2020")
     public Map<String, Object> getAccidentStatus() throws Exception {
@@ -287,18 +296,7 @@ public class AccidentAPIController {
 
         return resultMap;
     }
-    @GetMapping("/api/accident/age/chart")
-    public Map<String, Object> getAgeInfo(@RequestParam String region){
-        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
-        
-        List<RegionalInfoVO> data = null;
-        data = service2.selectSidoInfo(region);
-            
-        resultMap.put("status", true);
-        resultMap.put("data", data);
 
-        return resultMap;
-    }
     @GetMapping("/api/accident/regional")
     public Map<String, Object> getAccidentRegional() throws Exception {
     
@@ -366,7 +364,7 @@ public class AccidentAPIController {
         
         List<RegionalInfoVO> data = null;
         data = service2.selectSidoInfo(region);
-            
+    
         resultMap.put("status", true);
         resultMap.put("data", data);
 
@@ -376,54 +374,61 @@ public class AccidentAPIController {
     public Map<String, Object> getTemperature() throws Exception {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         
-        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15084711/v1/uddi:e561881b-9501-4439-b030-b32ac3eb4831");
-        urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10000", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
-        //System.out.println(urlBuilder.toString());
-    
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-
-        System.out.println(sb.toString());
-    
-        JSONObject jsonObject = new JSONObject(sb.toString());
-        Integer cntObject = jsonObject.getInt("currentCount");
-        System.out.println("갯수 : "+cntObject);
+        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList");
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
+        urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("999", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("dataCd", "UTF-8") + "=" + URLEncoder.encode("ASOS", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("dateCd", "UTF-8") + "=" + URLEncoder.encode("DAY", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("startDt", "UTF-8") + "=" + URLEncoder.encode("20200101", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("endDt", "UTF-8") + "=" + URLEncoder.encode("20201231", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("stnIds", "UTF-8") + "=" + URLEncoder.encode("108", "UTF-8"));
         
-        JSONArray dataArray = jsonObject.getJSONArray("data");
-        for(int i=0; i<dataArray.length(); i++) {
-            JSONObject obj = dataArray.getJSONObject(i);
-            String week = obj.getString("요일");
-            String dayDt = obj.getString("일자");
-            Float temperature = obj.getFloat("최저온도");   
+        System.out.println(urlBuilder.toString());
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date dt = formatter.parse(dayDt);
+        DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(urlBuilder.toString());
+
+      
+        doc.getDocumentElement().normalize();
+        System.out.println(doc.getDocumentElement().getNodeName());
+
+        NodeList nList = doc.getElementsByTagName("item");
+        System.out.println("데이터 수 : "+nList.getLength());
+
+        for(int i=0; i<nList.getLength(); i++) {
+            Node n = nList.item(i);
+            Element elem = (Element)n;
+
+            String time = getTagValue("tm", elem);
+            String rainfall = getTagValue("sumRn", elem);
+            String wind = getTagValue("avgWs", elem);
+            String temp = getTagValue("avgTa", elem);
+            System.out.println("=========================================");
 
             TemperatureVO vo = new TemperatureVO();
-            vo.setWeek(week);
-            vo.setDayDt(dt);
-            vo.setTemperature(temperature);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date dt = formatter.parse(time);
+
+            if(rainfall == null) {
+                rainfall = "0";
+            }
+
+            vo.setTm(dt);
+            vo.setRainfall(Double.parseDouble(rainfall));
+            vo.setWind(Double.parseDouble(wind));
+            vo.setTemp(Double.parseDouble(temp));
 
             service.inserttemperatureInfo(vo);
+
         }
-        resultMap.put("status", true);
-        return resultMap;
+            return resultMap;
     }
     
+        
     @GetMapping("/api/accident/underconstruction")
     public Map<String, Object> getUnderconstruction() throws Exception {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
@@ -461,33 +466,51 @@ public class AccidentAPIController {
         JSONArray itemsArr = bodyObj.getJSONArray("items");
         for(int i=0; i<itemsArr.length(); i++) {
             JSONObject obj = itemsArr.getJSONObject(i);
-            String roadtype = obj.getString("type");
-            String event_type = obj.getString("eventType");
+            String road_type = obj.getString("type");
+            String eventType = obj.getString("eventType");
             String eventDetailType = obj.getString("eventDetailType");   
-            String startDt = obj.getString("startDate");
-            String roadname = obj.getString("roadName");
+            String startDate = obj.getString("startDate");
+            String roadName = obj.getString("roadName");
             String roadDrcType = obj.getString("roadDrcType"); 
             String lanesBlockType = obj.getString("lanesBlockType");
             String endDt = obj.getString("endDate");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            Date dt = formatter.parse(startDt);
-            Date ddt = formatter.parse(endDt);
+       
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date dt = sdf.parse(startDate);
+            Date ddt = sdf.parse(endDt);
 
             CarSectionVO vo = new CarSectionVO();
-            vo.setRoadtype(roadtype);
-            vo.setEvent_type(event_type);
+            vo.setRoad_type(road_type);
+            vo.setEventType(eventType);
             vo.setEventDetailType(eventDetailType);
-            vo.setStartDt(dt);
-            vo.setRoadname(roadname);
+            vo.setStartDate(dt);;
+            vo.setRoadName(roadName);
             vo.setRoadDrcType(roadDrcType);
             vo.setLanesBlockType(lanesBlockType);
             vo.setEndDt(ddt);
 
             service2.insertCarSection(vo);
-
         }
+
         resultMap.put("status", true);
+        return resultMap;
+    }
+    @GetMapping("/api/Real/{date}")
+    public Map<String, Object> getConstructionInfoByDate(
+        @PathVariable String date) {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        if(date.equals("today")) {
+            List<CarSectionVO> list = service2.selectRealTodayConstrunction();
+            resultMap.put("status", true);
+            resultMap.put("data", list);
+        }
+        else {
+            List<CarSectionVO> list = service2.selectRealConstrutionInfo(date);
+            resultMap.put("status", true);
+            resultMap.put("data", list);
+        }
         return resultMap;
     }
     @GetMapping("/api/accident/real_traffic")
@@ -555,80 +578,30 @@ public class AccidentAPIController {
         resultMap.put("status", true);
         return resultMap;
     }
-    @GetMapping("/api/realTrafficInfo/{date}")
-    public Map<String, Object> getRealTrafficInfo(@PathVariable String date) {
+    @GetMapping("/api/realTrafficInfo/{date}/{time}/{amount}")
+    public Map<String, Object> getRealTrafficInfo(@PathVariable String date, @PathVariable String time, @PathVariable String amount) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
         if(date.equals("today")) {
-            List<RealTrafficVO> list = service2.selectRealTodayTrafficInfo();
+            List<RealTrafficVO> list = service2.selectRealTrafficInfo(date, time, amount);
+            resultMap.put("status", true);
             resultMap.put("data", list);
+        }
+            resultMap.put("status", false);
             return resultMap;
         }
-            List<RealTrafficVO> list = service2.selectRealTrafficInfo(date);
-            resultMap.put("data", list);
-            return resultMap;
-        }
-        
-    @GetMapping("/api/accident/road_status")
-    public Map<String, Object> getRoad_Status() throws Exception {
+    @GetMapping("api/routename/{name}")
+    public Map<String, Object> getROuteAameInfo(@PathVariable String name) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 
-        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15070272/v1/uddi:ae53200b-fa15-4722-926f-fa09ce07e9dd");
-        urlBuilder.append("?" + URLEncoder.encode("page", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("perPage", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("serviceKey", "UTF-8") + "=tRlr59%2F4dQDnFxa4zgFhCjp8J33ZT%2BnEyJB4bcN4mMBoEKCCYCZ44RaQo4Dl6nt6qyMkUaRww8lWmJmNWYMFJg%3D%3D");
-
-        System.out.println(urlBuilder.toString());
-
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-
-        JSONObject jsonObject = new JSONObject(sb.toString());
-        JSONObject bodyObj = (JSONObject) jsonObject.get("body");     
-        //JSONObject itemsObj = (JSONObject) bodyObj.get("items"); 
-
-        JSONArray itemsArr = bodyObj.getJSONArray("items");
-        for(int i=0; i<itemsArr.length(); i++) {
-            JSONObject obj = itemsArr.getJSONObject(i);
-            String roadtype = obj.getString("type");
-            String event_type = obj.getString("eventType");
-            String eventDetailType = obj.getString("eventDetailType");   
-            String startDt = obj.getString("startDate");
-            String roadname = obj.getString("roadName");
-            String roadDrcType = obj.getString("roadDrcType"); 
-            String lanesBlockType = obj.getString("lanesBlockType");
-            String endDt = obj.getString("endDate");
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            Date dt = formatter.parse(startDt);
-            Date ddt = formatter.parse(endDt);
-
-            CarSectionVO vo = new CarSectionVO();
-            vo.setRoadtype(roadtype);
-            vo.setEvent_type(event_type);
-            vo.setEventDetailType(eventDetailType);
-            vo.setStartDt(dt);
-            vo.setRoadname(roadname);
-            vo.setRoadDrcType(roadDrcType);
-            vo.setLanesBlockType(lanesBlockType);
-            vo.setEndDt(ddt);
-
-            service2.insertCarSection(vo);
-
-        }
-        resultMap.put("status", true);
+        List<RealTrafficVO> list = service2.selectOption(name);
         return resultMap;
+    }
+    public static String getTagValue(String tag, Element elem) {
+        NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
+        if(nlList == null) return null;
+        Node node = (Node) nlList.item(0);
+        if(node == null) return null;
+        return node.getNodeValue();
     }
 }

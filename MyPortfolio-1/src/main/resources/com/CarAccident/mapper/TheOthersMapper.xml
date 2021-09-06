@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CarAccident.mapper.TheOthersMapper">
+<select id="temperatureYearWind" resultType="com.CarAccident.vo.TemperatureVO">
+    select avg(wind) as wind, month(str_to_date(tm,"%Y-%m-%d")) as tm_month from temperature
+    group by tm_month
+</select>
+<select id="temperatureYear" resultType="com.CarAccident.vo.TemperatureVO">
+    select avg(temp) as temp, month(str_to_date(tm,"%Y-%m-%d")) as tm_month from temperature
+    group by tm_month
+</select>
+<select id="temperatureYearRainfall" resultType="com.CarAccident.vo.TemperatureVO">
+    select avg(rainfall) as rainfall, month(str_to_date(tm,"%Y-%m-%d")) as tm_month from temperature
+    group by tm_month
+</select>
+<select id="selectaccidentCnt" resultType="com.CarAccident.vo.RegionalInfoVO">
+    select avg(region_acc_cnt) as region_acc_cnt, region_month from accident_regional
+    group by region_month
+</select>
+</mapper>

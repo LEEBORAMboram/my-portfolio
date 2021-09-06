@@ -7,26 +7,22 @@
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/index.css">
-    <link rel="stylesheet" href="/assets/css/regional.css">
 </head>
 <body>
     <div class="left_menu">
-        <a href="/" id="logo">CAR ACCIDENT INFO</a>
+        <a href="/" id="logo">CAR ACCIDENT INFORMATION</a>
             <ul class="main_menu">
                 <li>
-                    <a href="#">Overview <span>한 눈에 보기</span></a>
+                    <a href="/outline">Outline <span>개요</span></a>
                 </li>
                 <li>
-                    <a href="#">Highway <span>고속도로별</span></a>
+                    <a href="/real">Safety information <span>교통사고 정보</span></a>
                 </li>
                 <li>
-                    <a href="#">Section <span>구간별</span></a>
+                    <a href="/section">Major Accident Sections <span>주요 사고 구간</span></a>
                 </li>
                 <li>
-                    <a href="#">Weather <span>날씨별</span></a>
-                </li>
-                <li>
-                    <a href="#">Accident Prediction <span>향후 예측</span></a>
+                    <a href="/theothers">Weather Accident Statistics <span>날씨별 사고 통계</span></a>
                 </li>
             </ul>
             

@@ -7,7 +7,14 @@ import lombok.Data;
 @Data
 public class TemperatureVO {
     private Integer seq;
-    private String week;
-    private Date dayDt;
-    private Float temperature;
+    private Double rainfall;
+    private Double wind;
+    private Double temp;
+    private Date tm;
+
+    private String tm_month;
+
+    // private String rf;
+    // private String w;
+    // private String t;
 }

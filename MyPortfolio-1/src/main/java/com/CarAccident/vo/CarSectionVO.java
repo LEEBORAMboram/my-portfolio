@@ -1,5 +1,7 @@
 package com.CarAccident.vo;
 
+
+
 import java.util.Date;
 
 import lombok.Data;
@@ -7,11 +9,11 @@ import lombok.Data;
 @Data
 public class CarSectionVO {
     private Integer seq;
-    private String roadtype;
-    private String event_type;
+    private String road_type;
+    private String eventType;
     private String eventDetailType;
-    private Date startDt;
-    private String roadname;
+    private Date startDate;
+    private String roadName;
     private String roadDrcType;
     private String lanesBlockType;
     private Date endDt;

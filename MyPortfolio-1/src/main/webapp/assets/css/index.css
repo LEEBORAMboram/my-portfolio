@@ -1,30 +1,27 @@
-.container {width: 980px; margin: 30px auto; font-size: 0;}
+.container {text-align: center;}
 .container > div {display: inline-block; vertical-align: top; font-size: 16px;}
-.left_menu {width: 260px;}
-.left_menu a {display: block;}
 
-.region_select {width: 500px;}
+
+.left_menu a {display: block;margin-top: 20px;}
 
 #logo {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
     font-size: 24px; text-decoration: none; text-align: center;
     padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 5px; margin-bottom: 25px; 
-}
-.dashboard_area {width: 690px; background-color: #afb; height: 900px; margin-left: 30px;}
-.main_menu a {
-    font-size: 16px; font-family: "Roboto", sans-serif; text-decoration: none; background-color: #fff;
-    color: #333; font-weight: 500; padding: 15px; position: relative; margin-bottom: 15px;
-    overflow: hidden; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-.main_menu a span {font-size: 13px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;}
-.main_menu a::before {content: ""; display: inline-block; position: absolute; left: 0; top: 0;
-    width: 5px; height: 100%; background-color: #fff;
-}
-.main_menu a:hover::before {
-    background-color: #333; 
+    border-radius: 5px; 
 }
 
-.content_right {width: 700px; height: 300px; margin-left: 20px;}
-.content_right {background-color: #fff; border-radius:10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    box-sizing: border-box; padding: 20px;}
-.age_status {width:300px; font-size: 0;}
+ul li {list-style-type: none; float:left; margin-left: 5px;}
+
+.main_menu a {
+    overflow: hidden;
+    font-size: 15px; font-family: "Roboto", sans-serif; text-decoration: none; background-color: #fff;
+    color: #333; font-weight: 500; padding: 15px; margin-bottom: 15px;
+    border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.main_menu a span {font-size: 13px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;}
+
+.dashboard_area {width: 800px; height: 900px; margin-left: 30px;}
+.content_left { width:1080px; height: 900px ; margin: center;
+    position: absolute; top: 0; display: inline-block; text-align: center;
+}

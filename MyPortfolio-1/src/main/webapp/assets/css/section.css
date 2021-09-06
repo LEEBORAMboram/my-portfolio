@@ -1,0 +1,13 @@
+.container {width:1080px; margin:30px auto; font-size: 0;}
+.container > div {display: inline-block; vertical-align: top; font-size: 16px;}
+
+.main_menu {list-style-type: none; float:left; text-align: center;
+}
+.main_menu > div {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
+    font-size: 24px; text-decoration: none; text-align: center;
+    padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 5px; 
+}
+
+.content_head {margin-top: 20px;}
+

@@ -1,13 +1,22 @@
-.container {width: 1000px; margin: 30px auto; font-size: 0;}
-.container > div {display: inline-block; vertical-align: top; font-size: 20px;}
+.car_accident {font-size: 20px; font-weight: 700;}
 
-.content_left {font-size: 30px; font-family: "Noto Sans KR", sans-serif;
-    background-color: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    box-sizing: border-box; padding: 20px; margin-right: 450px; margin-left: 30px;
-}
+.right_area {
+    width: 200px; height: 80px; margin-right: 20px;}
 
-.content_right {width: 500px; height:200px; margin-left: 20px;}
-.real_traffic_information {font-size: 12px; width: 100%; font-family: "Noto Sans KR", sans-serif;}
-.real_traffic_information td{width: 33.33%; text-align: center;
-    padding: 10px 0; border: 1px solid #eee;
+.right_area > div {
+    width: 50%; margin-bottom: 20px; position:relative; 
 }
+.content_area > div {display: inline-block; vertical-align: top; text-align: center;
+    padding: 40px; box-sizing: border-box; background-color: #fff;
+    margin-right: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-family: "Noto Sans KR", sans-serif;
+}
+.content_area > div:last-child {margin-right: 20px;}
+.content_area {font-size: 25px; margin-right: 20px;}
+.content_right #date {position:absolute; right:0; top:0; 
+    font-family: "Roboto Sans KR", sans-serif;
+    font-weight: 700; font-size: 20px; width: 110px; padding: 12px; border: 0; box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    outline: none; }
+
+
+.Real_Traffic_Chart{width: 260px;}
