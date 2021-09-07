@@ -50,11 +50,6 @@ public class CarRegionalService {
     public List<RegionalInfoVO> selectSidoInfo(String region) {
         return mapper.selectSidoInfo(region);
     }
-<<<<<<< HEAD
-    public void insertRoadRiskIndex(RoadriskindexVO vo) {
-        mapper.insertRoadRiskIndex(vo);
-    }
-=======
     public List<RealTrafficVO> selectOption(String name){
         return mapper.selectOption(name);
     }
@@ -63,5 +58,4 @@ public class CarRegionalService {
         mapper.insertRoadRiskIndex(vo);
     }
  }
->>>>>>> develop
 

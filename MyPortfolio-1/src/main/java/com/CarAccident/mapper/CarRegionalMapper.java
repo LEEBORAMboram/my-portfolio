@@ -15,14 +15,9 @@ public interface CarRegionalMapper {
     public void insertCarSection(CarSectionVO vo);
     public List<RegionalInfoVO> selectSidoInfo(String region);
     public void insertRealTrafficInfo(RealTrafficVO vo);
-<<<<<<< HEAD
-    public List<RealTrafficVO> selectRealTrafficInfo(String date);
-
-=======
     public List<RealTrafficVO> selectRealTrafficInfo(String date, String amount, String time);
     public List<RealTrafficVO> selectOption(String name);
     public List<CarSectionVO> selectRealConstrutionInfo(String date);
     
->>>>>>> develop
     public void insertRoadRiskIndex(RoadriskindexVO vo);
 }

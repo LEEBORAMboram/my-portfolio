@@ -72,13 +72,8 @@ public class RealAPIController {
 
         StringBuilder urlBuilder = new StringBuilder("http://taas.koroad.or.kr/data/rest/road/dgdgr/highway");
         urlBuilder.append("?" + URLEncoder.encode("authKey", "UTF-8") + "=JzEOb628nl7APcar0CQWRlccfLeIVdvb6vFVXvHO9QvLdn2PBbLjg%2FN41BPFY%2BEy");
-<<<<<<< HEAD
         urlBuilder.append("&" + URLEncoder.encode("frwyNm", "UTF-8") + "=" + URLEncoder.encode("서울외곽순환고속도로", "UTF-8"));
         urlBuilder.append("&" + URLEncoder.encode("frwySctnNm", "UTF-8") + "=" + URLEncoder.encode("호원IC-호원IC", "UTF-8"));
-=======
-        urlBuilder.append("&" + URLEncoder.encode("frwyNm", "UTF-8") + "=" + URLEncoder.encode("과천의왕간고속도로", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("frwySctnNm", "UTF-8") + "=" + URLEncoder.encode("봉담IC-금곡IC", "UTF-8"));
->>>>>>> develop
         urlBuilder.append("&" + URLEncoder.encode("vhctyCd", "UTF-8") + "=" + URLEncoder.encode("01", "UTF-8"));
         System.out.println(urlBuilder.toString());
         
