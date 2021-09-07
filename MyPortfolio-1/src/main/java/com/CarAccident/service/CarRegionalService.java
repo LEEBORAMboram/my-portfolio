@@ -1,6 +1,5 @@
 package com.CarAccident.service;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -9,6 +8,7 @@ import com.CarAccident.mapper.CarRegionalMapper;
 import com.CarAccident.vo.CarSectionVO;
 import com.CarAccident.vo.RealTrafficVO;
 import com.CarAccident.vo.RegionalInfoVO;
+import com.CarAccident.vo.RoadriskindexVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +59,9 @@ public class CarRegionalService {
     }   
     public List<RegionalInfoVO> selectSidoInfo(String region) {
         return mapper.selectSidoInfo(region);
+    }
+    public void insertRoadRiskIndex(RoadriskindexVO vo) {
+        mapper.insertRoadRiskIndex(vo);
     }
 
 }

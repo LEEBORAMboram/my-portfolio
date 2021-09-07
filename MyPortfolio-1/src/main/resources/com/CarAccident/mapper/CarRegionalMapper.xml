@@ -40,4 +40,15 @@
 
     </insert>
 
+    <insert id="insertRoadRiskIndex">
+        INSERT INTO roadriskindex
+        (
+            road_index, line_string, anals_value, anals_grd, highway, highway_section
+        )
+        VALUES
+        (
+            #{road_index}, #{line_string}, #{anals_value}, #{anals_grd}, #{highway}, #{highway_section}
+        )
+
+    </insert>
 </mapper>
