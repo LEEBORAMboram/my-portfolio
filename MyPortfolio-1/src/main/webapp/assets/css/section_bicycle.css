@@ -1,0 +1,31 @@
+.container {width:1080px; margin:30px auto; font-size: 0;}
+.container > div {display: inline-block; vertical-align: top; font-size: 16px;}
+
+.bicycel_information {width: 510px; height: 200px; margin-left: 20px;}
+/* .content_left {background-color: #fff; border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); box-sizing: border-box;
+    padding:20px;
+} */
+ 
+.bicycle_information {width: 200%; font-family: "Noto Sans KR", sans-serif;}
+.bicycle_information td:first-child {width: 80%; text-align: center;
+    padding:10px 0; border: 1px solid #eee; ;
+}
+.bicycle_information td:last-child {width: 20%; text-align: center;
+    padding:10px 0; border: 1px solid #eee;
+}
+.bicycle_accident thead td {background-color: #999; color: #fff;}
+.real_construction {background-color: #fff; font-size: 15px;}
+
+.real_traffic_pager_area{font-size: 12px; text-align: center; margin-top: 10px;}
+
+.real_traffic_pager_area .current{font-weight: 700;}
+
+
+.real_construction {display: none;}
+.real_construction .active {display: table-row-group;}
+
+.content_left{width: 200%; font-family: "Noto Sans KR", sans-serif;}
+
+.bicycle_accident {display: none;}
+.bicycle_accident.active {display: table-row-group;}

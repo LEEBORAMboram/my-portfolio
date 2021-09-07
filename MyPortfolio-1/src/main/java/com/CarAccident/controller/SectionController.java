@@ -4,9 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Regional_b {
-    @GetMapping("/regional/real")
-    public String getRegionalReal() {
-        return "/real/real";
+public class SectionController {
+    @GetMapping("/section") 
+    public String getReigion() {
+    
+        return "/section/section";
     }
 }

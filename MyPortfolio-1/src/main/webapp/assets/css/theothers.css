@@ -1,0 +1,17 @@
+.right_area {
+    width: 830px; height: 1000px; padding-left: 20px;
+}
+.right_area > div {
+    height: 100px; width: 100%; margin-bottom: 20px;
+    position: relative;
+}
+
+.content_area {font-family: "Noto Sans KR", sans-serif; position: relative;
+    font-size: 0;
+}
+
+.content_area > div {
+    display: inline-block; vertical-align: top; text-align: center;
+    padding: 30px; box-sizing: border-box; background-color: #fff;
+    margin-right: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+}

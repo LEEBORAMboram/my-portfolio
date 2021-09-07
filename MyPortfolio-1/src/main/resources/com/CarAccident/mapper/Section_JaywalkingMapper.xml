@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CarAccident.mapper.Section_JaywalkingMapper">
+<insert id="insertSectionJaywalking">
+    INSERT INTO section_jaywalking
+    (
+        sido_sgg_nm, spot_nm, occrrnc_cnt, caslt_cnt, dth_dnv_cnt, se_dnv_cnt, sl_dnv_cnt, wnd_dnv_cnt, lo_crd, la_crd
+    )
+    VALUES
+    (
+        #{sido_sgg_nm}, #{spot_nm}, #{occrrnc_cnt}, #{caslt_cnt}, #{dth_dnv_cnt}, #{se_dnv_cnt}, #{sl_dnv_cnt}, #{wnd_dnv_cnt}, #{lo_crd}, #{la_crd}
+    )
+</insert>
+<select id="selectJaywalkingRegionBunch" resultType="com.CarAccident.vo.Section_JaywalkingVO">
+       select * from (
+        select *,
+       	case
+            when sido_sgg_nm like '%서울%' then '서울특별시'
+            when sido_sgg_nm like '%부산%' then '부산광역시'
+            when sido_sgg_nm like '%대구%' then '대구광역시'
+            when sido_sgg_nm like '%인천%' then '인천광역시'
+            when sido_sgg_nm like '%광주%' then '광주광역시'
+            when sido_sgg_nm like '%대전%' then '대전광역시'
+            when sido_sgg_nm like '%울산%' then '울산광역시'
+            when sido_sgg_nm like '%세종%' then '세종특별자치시'
+            when sido_sgg_nm like '%경기%' then '경기도'
+            when sido_sgg_nm like '%강원%' then '강원도'
+            when sido_sgg_nm like '%충북%' then '충청북도'
+            when sido_sgg_nm like '%충남%' then '충청남도'
+            when sido_sgg_nm like '%전북%' then '전라북도'
+            when sido_sgg_nm like '%전남%' then '전라남도'
+            when sido_sgg_nm like '%경북%' then '경상북도'
+            when sido_sgg_nm like '%경남%' then '경상남도'
+            when sido_sgg_nm like '%제주%' then '제주특별자치시'
+        end as region
+        from section_jaywalking
+    ) a
+    where region like #{region}
+</select>
+<select id="selectRegionName" resultType="java.lang.String">
+     select distinct region from (
+        select case
+            when sido_sgg_nm like '%서울%' then '서울특별시'
+            when sido_sgg_nm like '%부산%' then '부산광역시'
+            when sido_sgg_nm like '%대구%' then '대구광역시'
+            when sido_sgg_nm like '%인천%' then '인천광역시'
+            when sido_sgg_nm like '%광주%' then '광주광역시'
+            when sido_sgg_nm like '%대전%' then '대전광역시'
+            when sido_sgg_nm like '%울산%' then '울산광역시'
+            when sido_sgg_nm like '%세종%' then '세종특별자치시'
+            when sido_sgg_nm like '%경기%' then '경기도'
+            when sido_sgg_nm like '%강원%' then '강원도'
+            when sido_sgg_nm like '%충북%' then '충청북도'
+            when sido_sgg_nm like '%충남%' then '충청남도'
+            when sido_sgg_nm like '%전북%' then '전라북도'
+            when sido_sgg_nm like '%전남%' then '전라남도'
+            when sido_sgg_nm like '%경북%' then '경상북도'
+            when sido_sgg_nm like '%경남%' then '경상남도'
+            when sido_sgg_nm like '%제주%' then '제주특별자치시'
+        end as region
+        from section_jaywalking
+    ) a
+</select>
+
+<select id="getSigunguNames" resultType="java.lang.String">
+    select substring_index(sigungu, " ", -1) as sigungu from (
+        select
+            distinct substring_index(spot_nm, " ", 2) as sigungu
+        from section_jaywalking
+        where spot_nm like #{spot}
+    ) a
+</select>
+
+<select id="selectAddressJaywalking" resultType="com.CarAccident.vo.Section_JaywalkingVO">
+    select * from(
+	    select distinct 
+        spot_nm, occrrnc_cnt, lo_crd, la_crd, substring_index(spot_nm, " ", 2) as selectbox 
+    from section_bicycle
+    )a
+    where spot_nm like #{selectbox}
+</select>
+</mapper>

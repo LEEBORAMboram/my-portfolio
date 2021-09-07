@@ -18,50 +18,50 @@ public class CarRegionalService {
     @Autowired
     CarRegionalMapper mapper;
     
-    // public List<RealTrafficInfoVO> selectTodayRealTrafficInfo() {
-    //     Calendar now = Calendar.getInstance();
-    //     Calendar standard = Calendar.getInstance();
-    //     standard.set(Calendar.HOUR_OF_DAY, 9);
-    //     standard.set(Calendar.MINUTE, 30);
-    //     standard.set(Calendar.SECOND, 00);
-    //     if(now.getTimeInMillis() < standard.getTimeInMillis()) {
-    //         now.add(Calendar.DATE, -1);
-    //     }
-    //     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    //     String dt = formatter.format(now.getTime());
-    //     System.out.println(dt);
-
-    //     return mapper.selectRealRegion(dt);
-    // }
     public void insertCarSection(CarSectionVO vo) {
         mapper.insertCarSection(vo);
+    }
+    public List<CarSectionVO> selectRealTodayConstrunction() {
+
+        Calendar now = Calendar.getInstance();
+        Calendar standard = Calendar.getInstance();
+        standard.set(Calendar.HOUR_OF_DAY, 10);
+        standard.set(Calendar.MINUTE, 00);
+        standard.set(Calendar.SECOND, 00);
+
+        if(now.getTimeInMillis() < standard.getTimeInMillis()) {
+            now.add(Calendar.DATE, -5);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        String dt = formatter.format(now.getTime());
+
+        return mapper.selectRealConstrutionInfo(dt);
+    }
+    public List<CarSectionVO> selectRealConstrutionInfo(String date){
+        return mapper.selectRealConstrutionInfo(date);
     }
     public void insertRealTrafficInfo(RealTrafficVO vo) {
         mapper.insertRealTrafficInfo(vo);
     }
-    public List<RealTrafficVO> selectRealTodayTrafficInfo() {
-        Calendar now = Calendar.getInstance();
-        Calendar standard = Calendar.getInstance();
-        standard.set(Calendar.HOUR_OF_DAY, 9);
-        standard.set(Calendar.MINUTE, 30);
-        standard.set(Calendar.SECOND, 00);
-        if(now.getTimeInMillis() < standard.getTimeInMillis()) {
-            now.add(Calendar.DATE, -1);
-        }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dt = formatter.format(now.getTime());
-        System.out.println(dt);
-
-        return mapper.selectRealTrafficInfo(dt);
-    }
-    public List<RealTrafficVO> selectRealTrafficInfo(String date) {
-        return mapper.selectRealTrafficInfo(date);
+    
+    public List<RealTrafficVO> selectRealTrafficInfo(String date, String amount, String time) {
+        return mapper.selectRealTrafficInfo(date, amount, time);
     }   
     public List<RegionalInfoVO> selectSidoInfo(String region) {
         return mapper.selectSidoInfo(region);
     }
+<<<<<<< HEAD
     public void insertRoadRiskIndex(RoadriskindexVO vo) {
         mapper.insertRoadRiskIndex(vo);
     }
+=======
+    public List<RealTrafficVO> selectOption(String name){
+        return mapper.selectOption(name);
+    }
 
-}
+    public void insertRoadRiskIndex(RoadriskindexVO vo) {
+        mapper.insertRoadRiskIndex(vo);
+    }
+ }
+>>>>>>> develop
+

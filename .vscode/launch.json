@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MyPortfolio1Application<MyPortfolio-1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.CarAccident.MyPortfolio1Application",
+            "projectName": "MyPortfolio-1",
+            "args": ""
+        }
+    ]
+}
