@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.CarAccident.mapper.RealInfoMapper">
+<insert id="insertRealInfo">
+    INSERT INTO realinfo
+    (
+        addressJibun, locationDataX, locationDataY, incidentTitle, startDate, lane
+    )
+    VALUES
+    (
+        #{addressJibun}, #{locationDataX}, #{locationDataY}, #{incidentTitle}, #{startDate}, #{lane}
+    )
+</insert>
+<select id="selectRealtime" resultType="com.CarAccident.vo.RealInfoVO">
+        select * from (
+                select *,
+                case
+                when addressJibun like '%서울%' then '서울특별시'
+                when addressJibun like '%부산%' then '부산광역시'
+                when addressJibun like '%대구%' then '대구광역시'
+                when addressJibun like '%인천%' then '인천광역시'
+                when addressJibun like '%광주%' then '광주광역시'
+                when addressJibun like '%대전%' then '대전광역시'
+                when addressJibun like '%울산%' then '울산광역시'
+                when addressJibun like '%세종%' then '세종특별자치시'
+                when addressJibun like '%경기%' then '경기도'
+                when addressJibun like '%강원%' then '강원도'
+                when addressJibun like '%충북%' then '충청북도'
+                when addressJibun like '%충남%' then '충청남도'
+                when addressJibun like '%전북%' then '전라북도'
+                when addressJibun like '%전남%' then '전라남도'
+                when addressJibun like '%경북%' then '경상북도'
+                when addressJibun like '%경남%' then '경상남도'
+                when addressJibun like '%제주%' then '제주특별자치시'
+                when addressJibun like '%충청남도%' then '충청남도'
+                when addressJibun like '%전라북도%' then '전라북도'
+                when addressJibun like '%전라남도%' then '전라남도'
+                when addressJibun like '%경상북도%' then '경상북도'
+                when addressJibun like '%경상남도%' then '경상남도'
+                end as region
+                from realinfo
+            ) a
+        where region like #{region}
+        order by region desc
+    </select>
+    <select id="selectRegionNameCategory" resultType="java.lang.String">
+        select distinct region from (
+        select case
+            when addressJibun like '%서울%' then '서울특별시'
+            when addressJibun like '%부산%' then '부산광역시'
+            when addressJibun like '%대구%' then '대구광역시'
+            when addressJibun like '%인천%' then '인천광역시'
+            when addressJibun like '%광주%' then '광주광역시'
+            when addressJibun like '%대전%' then '대전광역시'
+            when addressJibun like '%울산%' then '울산광역시'
+            when addressJibun like '%세종%' then '세종특별자치도'
+            when addressJibun like '%경기%' then '경기도'
+            when addressJibun like '%강원%' then '강원도'
+            when addressJibun like '%충북%' then '충청북도'
+            when addressJibun like '%충남%' then '충청남도'
+            when addressJibun like '%전북%' then '전라북도'
+            when addressJibun like '%전남%' then '전라남도'
+            when addressJibun like '%경북%' then '경상북도'
+            when addressJibun like '%경남%' then '경상남도'
+            when addressJibun like '%제주%' then '제주특별자치도'
+            when addressJibun like '%충청북도%' then '충청북도'
+            when addressJibun like '%충청남도%' then '충청남도'
+            when addressJibun like '%전라북도%' then '전라북도'
+            when addressJibun like '%전라남도%' then '전라남도'
+            when addressJibun like '%경상북도%' then '경상북도'
+            when addressJibun like '%경상남도%' then '경상남도'
+        end as region
+        from realinfo
+    ) a order by region asc
+</select>
+<select id="searchName" resultType="com.CarAccident.vo.RealInfoVO">
+        select distinct * from (
+                select distinct *,
+                case
+                when addressJibun like '서울%' then '서울특별시%'
+                when addressJibun like '부산%' then '부산광역시%'
+                when addressJibun like '대구%' then '대구광역시%'
+                when addressJibun like '인천%' then '인천광역시%'
+                when addressJibun like '광주%' then '광주광역시%'
+                when addressJibun like '대전%' then '대전광역시%'
+                when addressJibun like '울산%' then '울산광역시%'
+                when addressJibun like '세종%' then '세종특별자치시%'
+                when addressJibun like '경기%' then '경기도%'
+                when addressJibun like '강원%' then '강원도%'
+                when addressJibun like '충북%' then '충청북도%'
+                when addressJibun like '충남%' then '충청남도%'
+                when addressJibun like '전북%' then '전라북도%'
+                when addressJibun like '전남%' then '전라남도%'
+                when addressJibun like '경북%' then '경상북도%'
+                when addressJibun like '경남%' then '경상남도%'
+                when addressJibun like '제주%' then '제주특별자치시%'
+                when addressJibun like '충청남도%' then '충청남도%'
+                when addressJibun like '전라북도%' then '전라북도%'
+                when addressJibun like '전라남도%' then '전라남도%'
+                when addressJibun like '경상북도%' then '경상북도%'
+                when addressJibun like '경상남도%' then '경상남도%'
+                end as region
+                from realinfo
+            ) a
+        where addressJibun like #{search} and
+        <![CDATA[
+        date_format(startDate , "%Y-%m-%d") <= str_to_date(now(),"%Y-%m-%d")
+		and 
+		date_format(startDate , "%Y-%m-%d") >  date_sub(str_to_date(now(),"%Y-%m-%d"), interval 1 day)
+        group by addressJibun order by startDate desc
+        ]]>
+</select>
+
+<select id="selectrealSigungu" resultType="com.CarAccident.vo.RealInfoVO">
+  select
+    distinct startDate, addressJibun, incidentTitle, lane, substring_index(addressJibun, " ",3 ) as sigungu
+    from realinfo
+    where addressJibun like #{search} and
+    <![CDATA[
+    date_format(startDate , "%Y-%m-%d") <= str_to_date(now(),"%Y-%m-%d")
+	and 
+	date_format(startDate , "%Y-%m-%d") >  date_sub(str_to_date(now(),"%Y-%m-%d"), interval 1 day)
+    group by addressJibun order by startDate desc 
+    ]]>         
+</select>
+</mapper>

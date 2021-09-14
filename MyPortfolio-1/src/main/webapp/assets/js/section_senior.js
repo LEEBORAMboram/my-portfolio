@@ -5,37 +5,37 @@ $(function () {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 4 // 지도의 확대 레벨
     };  
- 
+
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     var circles = new Array(); // 2. 원들을 저장할 배열을 만들어놓고
 
     $("#main_region").change(function () {
         let region = $("#main_region").find("option:selected").val();
         
-        getRegionalSigungu(region)
+        getSeniorSectionSigungu(region)
     });
     $("#sub_region").change(function () {
         let region = $("#sub_region").find("option:selected").val()
         let region_all = $("#main_region").find("option:selected").val() + " " + $("#sub_region").find("option:selected").val()
-        getRegionalAccidentAddress(region_all);
+        getBicycleAccidentAddress(region_all);
     });
 
     function regionMaker() {
 
     }
 
-    getSectionRegionalRegions();
-    getRegionalSigungu("서울특별시");
-    getRegionalAccidentAddress();
+    getSeniorSectionRegions();
+    getSeniorSectionSigungu("서울특별시");
+    getBicycleAccidentAddress();
 
-    function getSectionRegionalRegions(region) {
+    function getSeniorSectionRegions(region) {
 
         $("#sub_region").prop("disabled", false)
         $("#sub_region").html("");
 
         $.ajax({
             type: "get",
-            url: "/api/section_regional/regions",
+            url: "/api/section_senior/regions",
             success: function (r) {
                 $("#main_region").html("");
                 console.log(r);
@@ -47,10 +47,10 @@ $(function () {
         })
     }
 
-    function getRegionalSigungu(spot) {
+    function getSeniorSectionSigungu(spot) {
         $.ajax({
             type: "get",
-            url: "/api/section_regional/sigungu?spot=" + spot,
+            url: "/api/section_senior/sigungu?spot=" + spot,
             success: function (r) {
                 $("#sub_region").html("");
                 console.log(r);
@@ -61,10 +61,10 @@ $(function () {
         })
     }
 
-    function getRegionalAccidentAddress(selectbox) {
+    function getBicycleAccidentAddress(selectbox) {
         $.ajax({
             type: "get",
-            url: "/api/section_jregional/address?selectbox=" + selectbox,
+            url: "/api/section_senior/seniorAccidentAdress?selectbox=" + selectbox,
             success: function (r) {
                 console.log(r);
 
@@ -74,19 +74,19 @@ $(function () {
                 let longitude = new Array();
                 let select = new Array();
 
-                $(".regional_accident").html("");
+                $(".senior_accident").html("");
 
                 for (let i = 0; i < 4; i++) {
-                    let tag = "<tbody class='regional_accident'></tbody>";
-                    $(".regional_information").append(tag);
+                    let tag = "<tbody class='senior_accident'></tbody>";
+                    $(".senior_information").append(tag);
                 }
 
-                for (let i = 0; i < r.regionalList2.length; i++) {
-                    let add = r.regionalList2[i].spot_nm;
-                    let occ = r.regionalList2[i].occrrnc_cnt;
-                    let la = r.regionalList2[i].la_crd;
-                    let lo = r.regionalList2[i].lo_crd;
-                    let se = r.regionalList2[i].selectbox;
+                for (let i = 0; i < r.seniorList2.length; i++) {
+                    let add = r.seniorList2[i].spot_nm;
+                    let occ = r.seniorList2[i].occrrnc_cnt;
+                    let la = r.seniorList2[i].la_crd;
+                    let lo = r.seniorList2[i].lo_crd;
+                    let se = r.seniorList2[i].selectbox;
 
                     address.push(add);
                     occ_cnt.push(occ);
@@ -94,25 +94,25 @@ $(function () {
                     longitude.push(lo);
                     select.push(se);
 
-                    //console.log(Math.floor(i/3));
+                    // console.log(Math.floor(i/3));
 
                     let page = Math.floor(i/100);
                     let tag =
                         '<tr>' +
-                        '<td>' + r.regionalList2[i].spot_nm + '</td>' +
-                        '<td>' + r.regionalList2[i].occrrnc_cnt + '</td>' +
+                        '<td>' + r.seniorList2[i].spot_nm + '</td>' +
+                        '<td>' + r.seniorList2[i].occrrnc_cnt + '</td>' +
                         +'</tr>'
-                    $(".regional_accident").eq(page).append(tag);
+                    $(".senior_accident").eq(page).append(tag);
                 }
-                $(".regional_accident").eq(0).addClass("active");
+                $(".senior_accident").eq(0).addClass("active");
 
                 // $("#real_traffic_next").click(function () {
                 //     let currentPage = Number($(".current").html());
                 //     currentPage++;
                 //     if (currentPage > 4) currentPage = 4;
                 //     $(".current").html(currentPage);
-                //     $(".regional_accident").removeClass("active");
-                //     $(".regional_accident").eq(currentPage - 1).addClass("active");
+                //     $(".senior_accident").removeClass("active");
+                //     $(".senior_accident").eq(currentPage - 1).addClass("active");
                 // })
 
                 // $("#real_traffic_prev").click(function () {
@@ -120,17 +120,17 @@ $(function () {
                 //     currentPage--;
                 //     if (currentPage < 1) currentPage = 1;
                 //     $(".current").html(currentPage);
-                //     $(".regional_accident").removeClass("active");
-                //     $(".regional_accident").eq(currentPage - 1).addClass("active");
+                //     $(".senior_accident").removeClass("active");
+                //     $(".senior_accident").eq(currentPage - 1).addClass("active");
                 // })
 
                 // 3. 이전에 그려져있던 원들을 삭제하고
                 removeCircle();
-                for(let i=0; i<r.regionalList2.length; i++) {
+                for(let i=0; i<r.seniorList2.length; i++) {
                     // 4. 반복문 안에서 circle객체를 생성하고
                     // 지도에 표시할 원을 생성합니다
                     var circle = new kakao.maps.Circle({
-                        center : new kakao.maps.LatLng(r.regionalList2[i].la_crd, r.regionalList2[i].lo_crd),  // 원의 중심좌표 입니다 
+                        center : new kakao.maps.LatLng(r.seniorList2[i].la_crd, r.seniorList2[i].lo_crd),  // 원의 중심좌표 입니다 
                         radius: 100, // 미터 단위의 원의 반지름입니다 
                         strokeWeight: 3, // 선의 두께입니다 
                         strokeColor: '#ff2222', // 선의 색깔입니다
@@ -140,9 +140,9 @@ $(function () {
                         fillOpacity: 0.7  // 채우기 불투명도 입니다   
                     });
                     // 5. 마지막에 그려지는 원을 지도의 중심점으로 세팅
-                    if(i == r.regionalList2.length - 1) {
-                        setCenter(r.regionalList2[i].la_crd, r.regionalList2[i].lo_crd);
-                        panTo(r.regionalList2[i].la_crd, r.regionalList2[i].lo_crd);
+                    if(i == r.seniorList2.length - 1) {
+                        setCenter(r.seniorList2[i].la_crd, r.seniorList2[i].lo_crd);
+                        panTo(r.seniorList2[i].la_crd, r.seniorList2[i].lo_crd);
                     }
                     // 지도에 원을 표시합니다 
                     circle.setMap(map);

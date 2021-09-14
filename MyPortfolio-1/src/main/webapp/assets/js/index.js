@@ -6,8 +6,38 @@ $(function(){
             console.log(r);
             
             let sidoArr = new Array();
-            let deathArr = new Array();
+            let cnt = new Array();
             
+            for(let i=0; i<r.data.length; i++) {
+                sidoArr.push(r.data[i].region_sido);
+                cnt.push(r.data[i].region_acc_cnt);
+            }
+            let accChart = new Chart($("#accChart"), {
+                    type:'bar',
+                    options:{
+                        responsive:false,
+                    },
+                    data:{
+                        labels:sidoArr,
+                        datasets:[{
+                            label:"지역별 교통사고 건 수",
+                            data: accChart,
+                            backgroundColor:['rgba(30, 20, 205, 0.5)']
+                        }
+                    ]
+                }
+            });
+        }
+    })
+    $.ajax({
+        type:"get",
+        url:"/api/accident/regional/chart?region=서울",
+        success:function(r) {
+            console.log(r);
+            
+            let sidoArr = new Array();
+            let deathArr = new Array();
+             
             for(let i=0; i<r.data.length; i++) {
                 sidoArr.push(r.data[i].region_sido);
                 deathArr.push(r.data[i].region_death);

@@ -73,14 +73,12 @@ $(function () {
                 let latitude = new Array();
                 let longitude = new Array();
                 let select = new Array();
-
                 $(".jaywalking_accident").html("");
 
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 10; i++) {
                     let tag = "<tbody class='jaywalking_accident'></tbody>";
                     $(".jaywalking_information").append(tag);
                 }
-
                 for (let i = 0; i < r.jaywalkingList.length; i++) {
                     let add = r.jaywalkingList[i].spot_nm;
                     let occ = r.jaywalkingList[i].occrrnc_cnt;
@@ -94,9 +92,9 @@ $(function () {
                     longitude.push(lo);
                     select.push(se);
 
-                    console.log(Math.floor(i/3));
+                    //console.log(Math.floor(i/3));
 
-                    let page = Math.floor(i/3);
+                    let page = Math.floor(i/100);
                     let tag =
                         '<tr>' +
                         '<td>' + r.jaywalkingList[i].spot_nm + '</td>' +

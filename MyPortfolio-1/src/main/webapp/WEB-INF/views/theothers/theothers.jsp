@@ -16,36 +16,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/assets/js/theothers.js"></script>
 </head>
-<body>
-    <div class="container">
-        <%@include file="/WEB-INF/views/includes/menu.jsp"%>
-        <div class=right_area">
-            <div class="content_head">               
-                <span class="상관관계">
-                    <span>날씨와 교통사고와의 상관관계</span>
-                </span>
-            </div>
-            <div class="content_area">
-                <!-- <select id="temperature_select">
-                    <option value="select">::선택::</option>
-                    <option value="rain_select">강우량별</option>
-                    <option value="wind_select">바람(풍속)별</option>
-                    <option value="temperature_select">기온별</option>
-                </select> -->
-                <div class="content_area chart_content">
-                    <h1>강수량별</h1>
-                    <canvas id="rainfall_Chart" style="width:100%; height:100%;"></canvas>
+    <body>
+        <div class="container"></div>
+            <%@include file="/WEB-INF/views/includes/menu.jsp"%>
+                <div class="dashboard_area">
+                    <div class="chart_content">
+                        <h1>강수량과 사고와의 관계</h1>
+                        <canvas id="rainfall_Chart"></canvas>
+                    </div>
+                    <div class="chart_content">
+                        <h1>바람(풍속)과 사고와의 관계</h1>
+                        <canvas id="wind_Chart"></canvas>
+                    </div>
+                    <div class="chart_content">
+                        <h1>기온과 사고와의 관계</h1>
+                        <canvas id="temperature_Chart"></canvas>
+                    </div>
                 </div>
-                <div class="content_area chasrt_content">
-                    <h1>바람(풍속)별</h1>
-                    <canvas id="wind_Chart" style="width:100%; height:100%;"></canvas>
-                </div>
-                <div class="content_area chart_content">
-                    <h1>기온별</h1>
-                    <canvas id="temperature_Chart" style="width:100%; height:100%;"></canvas>
-                </div>
-            </div>    
         </div>
-    </div>
-</body>
+    </body> 
 </html>

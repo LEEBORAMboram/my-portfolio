@@ -1,13 +1,32 @@
-.container {width:1080px; margin:30px auto; font-size: 0;}
-.container > div {display: inline-block; vertical-align: top; font-size: 16px;}
-
-.main_menu {list-style-type: none; float:left; text-align: center;
-}
-.main_menu > div {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
-    font-size: 24px; text-decoration: none; text-align: center;
-    padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 5px; 
+/* .left_menu a {overflow: hidden; width: 100%; padding: 20px 20px 0 20px; text-align: center;
+     position: relative; margin-top: 30px;
 }
 
-.content_head {margin-top: 20px;}
+#logo {font-family: "Roboto", sans-serif; font-weight: 700;
+    font-size: 24px;  text-align: center;
+    padding: 20px 0; position: absolute; left: 20px; top: 20px;
+} */
+/* .container {width: 100%; height: 100%;} */
 
+.content_head ul li {
+    border-color: rgb(26, 26, 26); color:#333; position: relative; padding: 10px; width: 20%; margin-top: 20px;
+    border-radius: 3px; box-shadow: 0 0 10px rgba(0,0,0,0.2); box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+/* .main_menu {list-style-type: none; float:left; text-align: center;
+}
+.main_menu > div {font-family: "Roboto", sans-serif; color: rgb(51, 51, 51); font-weight: 700;
+    font-size: 24px; text-decoration:burlywood; text-align: center;
+    padding: 20px 0; position: absolute; left: 20px; top: 20px; 
+} */
+
+.content_head a {
+    font-size: 20px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;
+}
+li a span {display: block;}
+
+li a:hover {background-color: #00ffff; text-decoration: none;}
+
+
+ 

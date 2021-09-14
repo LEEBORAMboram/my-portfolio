@@ -13,7 +13,7 @@ $(function () {
         let region = $("#main_region").find("option:selected").val();
         
         getTwowheeledSigungu(region)
-    });
+    }); 
     $("#sub_region").change(function () {
         let region = $("#sub_region").find("option:selected").val()
         let region_all = $("#main_region").find("option:selected").val() + " " + $("#sub_region").find("option:selected").val()
@@ -94,9 +94,9 @@ $(function () {
                     longitude.push(lo);
                     select.push(se);
 
-                    console.log(Math.floor(i/3));
+                    // console.log(Math.floor(i/3));
 
-                    let page = Math.floor(i/3);
+                    let page = Math.floor(i/100);
                     let tag =
                         '<tr>' +
                         '<td>' + r.twowheeledList2[i].spot_nm + '</td>' +
@@ -106,23 +106,23 @@ $(function () {
                 }
                 $(".twowheeled_accident").eq(0).addClass("active");
 
-                $("#real_traffic_next").click(function () {
-                    let currentPage = Number($(".current").html());
-                    currentPage++;
-                    if (currentPage > 4) currentPage = 4;
-                    $(".current").html(currentPage);
-                    $(".twowheeled_accident").removeClass("active");
-                    $(".twowheeled_accident").eq(currentPage - 1).addClass("active");
-                })
+                // $("#real_traffic_next").click(function () {
+                //     let currentPage = Number($(".current").html());
+                //     currentPage++;
+                //     if (currentPage > 4) currentPage = 4;
+                //     $(".current").html(currentPage);
+                //     $(".twowheeled_accident").removeClass("active");
+                //     $(".twowheeled_accident").eq(currentPage - 1).addClass("active");
+                // })
 
-                $("#real_traffic_prev").click(function () {
-                    let currentPage = Number($(".current").html());
-                    currentPage--;
-                    if (currentPage < 1) currentPage = 1;
-                    $(".current").html(currentPage);
-                    $(".twowheeled_accident").removeClass("active");
-                    $(".twowheeled_accident").eq(currentPage - 1).addClass("active");
-                })
+                // $("#real_traffic_prev").click(function () {
+                //     let currentPage = Number($(".current").html());
+                //     currentPage--;
+                //     if (currentPage < 1) currentPage = 1;
+                //     $(".current").html(currentPage);
+                //     $(".twowheeled_accident").removeClass("active");
+                //     $(".twowheeled_accident").eq(currentPage - 1).addClass("active");
+                // })
 
                 // 3. 이전에 그려져있던 원들을 삭제하고
                 removeCircle();

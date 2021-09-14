@@ -53,9 +53,33 @@ public class CarRegionalService {
     public List<RealTrafficVO> selectOption(String name){
         return mapper.selectOption(name);
     }
-
+    
     public void insertRoadRiskIndex(RoadriskindexVO vo) {
         mapper.insertRoadRiskIndex(vo);
     }
- }
+    public List<RoadriskindexVO> selecthighwayName(String name) {
+        return mapper.selecthighwayName(name);
+    }
+    public List<String> highwayName() {
+        return mapper.highwayName();
+    }
+    public List<String> highwaySection(String highway) {
+        return mapper.highwaySection(highway);
+    }
+    public List<String> selectLatitudeFrist(String highway, Integer grade, String highway_section) {
+        return mapper.selectLatitudeFrist(highway, grade, highway_section);
+    }
+    public List<String> selectLongitudeFirst(String highway, Integer grade, String highway_section) {
+        return mapper.selectLongitudeFirst(highway, grade, highway_section);
+    }
+    public List<String> selectLatitudeEnd(String highway, Integer grade, String highway_section) {
+        return mapper.selectLatitudeEnd(highway, grade, highway_section);
+    }
+    // public List<String> selectLongitudeEnd(String highway, Integer grade, String highway_section) {
+    //     return mapper.selectLongitudeEnd(highway, grade, highway_section);
+    // }
+    public List<RoadriskindexVO> selectLongitudeEnd(String highway, Integer grade, String highway_section) {
+        return mapper.selectLongitudeEnd(highway, grade, highway_section);
+    }
+}
 

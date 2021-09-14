@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class Section_JaywalkingService {
     @Autowired
     Section_JaywalkingMapper mapper;
+    
     public void insertSectionJaywalking(Section_JaywalkingVO vo) {
         mapper.insertSectionJaywalking(vo);
     }

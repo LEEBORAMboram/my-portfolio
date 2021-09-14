@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -17,8 +17,8 @@
 <body>
     <div class="container">
         <%@include file="/WEB-INF/views/includes/menu.jsp"%>
-        <div class="content_head">
-                <ul class = "main_menu">
+            <div class="content_head">
+                <ul> 
                     <li>
                         <a href="/section_bicycle"> <span>자전거 사고다발지역</span></a>
                     </li>
@@ -31,9 +31,11 @@
                     <li>
                         <a href="/section_twowheeled"> <span>이륜차 사고다발지역</span></a>
                     </li>
+                    <li>
+                        <a href="/section_senior"> <span>보행 고령자 사고다발지역</span></a>
+                    </li>
                 </ul>                
         </div>
-    
     </div>
 </body>
 </html>

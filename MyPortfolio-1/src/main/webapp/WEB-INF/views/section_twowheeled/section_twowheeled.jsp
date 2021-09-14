@@ -18,21 +18,19 @@
     <div class="container">
         <%@include file="/WEB-INF/views/section/section.jsp"%>
         <div class="dashboard_area">
-            <div class="dashboard_content">
-                <div class="col-3">
-                    <select id="main_region">
-                        <option value="local_selelct">광역시 혹은 도를 선택하세요</option>
-                        <c:forEach items="${main_region}" var="region" varStatus="status">
-                            <option value="${region.mcbscode}">${sub_region.mchgname}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <select id="sub_region">
-                        <option value="">전체</option>
-                    </select>
-                </div>
-                <div class="content_right">
+            <div class="content_center">
+                <select id="main_region">
+                    <option value="local_selelct">광역시 혹은 도를 선택하세요</option>
+                    <c:forEach items="${main_region}" var="region" varStatus="status">
+                        <option value="${region.mcbscode}">${sub_region.mchgname}</option>
+                    </c:forEach>
+                </select>
+                <select id="sub_region">
+                    <option value="">전체</option>
+                </select>
+            </div>
+            <div class="content_right">
+                <div class="chart" style="height: 30vh; overflow-y: scroll; overflow-x: hidden;">
                     <table class="twowheeled_information">
                         <thead>
                             <tr>
@@ -40,30 +38,27 @@
                                 <td>사고건수</td>
                             </tr>
                         </thead>                
-                    </table>
-                    <div class="real_traffic_pager_area">
-                        <button id="real_traffic_prev">&lt;</button>
-                        <span class="current">1</span> / <span class="total">3</span>
-                        <button id="real_traffic_next">&gt;</button>
-                    </div>
+                    </table> 
+                <!-- <div class="real_traffic_pager_area">
+                    <button id="real_traffic_prev">&lt;</button>
+                    <span class="current">1</span> / <span class="total">3</span>
+                    <button id="real_traffic_next">&gt;</button>          
+                </div> -->
                 </div>
-
-            </div>
-            <div class="content_left">
-                <div id="map" style="width:1000px;height:1000px;">
-
+                <div id="map" style="width: 90%;height:700px; margin: 0 auto; margin-top: 30px;">
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9def6594ef29932b65ab258116f1fe92"></script>
                     <script>
                         var container = document.getElementById('map');
                         var options = {
                             center: new kakao.maps.LatLng(33.450701, 126.570667),
-                            level: 3
+                            level: 4
                         };
 
                         var map = new kakao.maps.Map(container, options);
                     </script>
                 </div>
             </div>
+        </div>
     </div>
 </body>
 </html>

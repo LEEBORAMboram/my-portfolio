@@ -20,4 +20,12 @@ public interface CarRegionalMapper {
     public List<CarSectionVO> selectRealConstrutionInfo(String date);
     
     public void insertRoadRiskIndex(RoadriskindexVO vo);
+    public List<RoadriskindexVO> selecthighwayName(String name);
+    public List<String> highwayName();
+    public List<String> highwaySection(String highway);
+    public List<String> selectLatitudeFrist(String highway, Integer grade, String highway_section);            
+    public List<String> selectLongitudeFirst(String highway, Integer grade, String highway_section);        
+    public List<String> selectLatitudeEnd(String highway, Integer grade, String highway_section);
+    // public List<String> selectLongitudeEnd(String highway, Integer grade, String highway_section);
+    public List<RoadriskindexVO> selectLongitudeEnd(String highway, Integer grade, String highway_section);
 }

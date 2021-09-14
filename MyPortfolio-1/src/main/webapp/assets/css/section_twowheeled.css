@@ -1,0 +1,49 @@
+/* .container {width:100%; margin: auto; font-size: 0;} */
+/* .container > div {display: inline-block; vertical-align: top; font-size: 16px;} */
+.dashboard_area {width:80%; height: 80%; }
+
+.content_center select {width: 10%; height: 40px; text-align: center; font-size: 20px;
+}
+.content_center select #main_region {margin-left: 30px;}
+
+.content_right {margin-top: 30px; margin-left: 50px; width: 100%;}
+.content_right table {width: 90%; height: 200px; margin-left: 100px;
+     font-family: "Noto Sans KR", sans-serif;
+    border: 1px solid rgb(12, 5, 5); 
+}
+
+/* .content_left {background-color: #fff; border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); box-sizing: border-box;
+    padding:20px;
+} */
+.twowheeled_information tbody tr:nth-child(2n+1) {background-color: #f3e3e3;}
+
+.content_right td:first-child {width: 80%; text-align: center;
+    padding:10px 0; border: 1px solid rgb(12, 5, 5); font-size: 20PX;
+}
+.content_right td:last-child {width: 20%; text-align: center;
+    padding:10px 0; border: 1px solid rgb(12, 5, 5); font-size: 20PX;
+}
+.content_map {margin-right: 10px;}
+.twowheeled_accident thead td {background-color: #999; color: #fff;}
+
+.real_construction {background-color: #fff; font-size: 15px;}
+
+.real_traffic_pager_area{font-size: 12px; text-align: center; margin-top: 10px;}
+
+.real_traffic_pager_area .current{font-weight: 700;}
+
+
+/* .content_right {display: none;}
+.real_construction .active {display: table-row-group;} */
+
+.twowheeled_accident {display: none;}
+.twowheeled_accident.active {display: table-row-group;} 
+
+/* .content_head a {
+    font-size: 16px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;
+ }
+ li a span {display: block;} */
+ 
+ li a:hover {background-color: #00ffff; text-decoration: none;}
+ 

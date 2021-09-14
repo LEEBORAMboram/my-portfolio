@@ -7,6 +7,7 @@
             sum(region_slightly) as region_slightly,
             sum(region_injured) as region_injured,
             sum(region_death) as region_death,
+            sum(region_acc_cnt) as region_acc_cnt,
             sum(region_seriously) as region_seriously
         from accident_regional
         group by region_sido;
@@ -66,18 +67,52 @@
         (
              #{road_index}, #{line_string}, #{anals_value}, #{anals_grd}, #{highway}, #{highway_section}
         )
-
     </insert>
-
-    <insert id="insertRoadRiskIndex">
-        INSERT INTO roadriskindex
-        (
-            road_index, line_string, anals_value, anals_grd, highway, highway_section
-        )
-        VALUES
-        (
-            #{road_index}, #{line_string}, #{anals_value}, #{anals_grd}, #{highway}, #{highway_section}
-        )
-
-    </insert>
+    <select id="selecthighwayName" resultType="com.CarAccident.vo.RoadriskindexVO">
+        select * from roadriskindex
+        where highway like #{name}
+    </select>
+    <select id="highwayName" resultType="java.lang.String">
+        select distinct highway from roadriskindex
+    </select>
+    <select id="highwaySection" resultType="java.lang.String">
+        select distinct highway_section from roadriskindex
+        where highway = #{highway}
+    </select>
+    <select id="selectLatitudeFrist" resultType="java.lang.String">
+        select substring_index(latitudeFrist, " ", -1) as latitudeFrist from (
+            select
+                distinct substring_index(line_string, ",", 1) as latitudeFrist
+            from roadriskindex
+        where highway like #{highway} and anals_grd like #{grade} and highway_section like #{highway_section}
+        ) a
+    </select>
+    <select id="selectLongitudeFirst" resultType="java.lang.String">
+    select substring_index(longitudeFrist,"(", -1) from(
+        select substring_index(longitudeFrist, " ", 1) as longitudeFrist from (
+            select
+                distinct substring_index(line_string, ",", 1) as longitudeFrist
+            from roadriskindex
+        where highway like #{highway} and anals_grd like #{grade} and highway_section like #{highway_section}
+        ) a
+    )b
+    </select>
+    <select id="selectLatitudeEnd" resultType="java.lang.String">
+    select substring_index(latitudeEnd,")",1) from( 
+        select substring_index(latitudeEnd, " ", -1) as latitudeEnd from (
+            select
+                distinct substring_index(line_string, ",", 2) as latitudeEnd
+                from roadriskindex
+        where highway like #{highway} and anals_grd like #{grade} and highway_section like #{highway_section} 
+        ) a
+    )b
+    </select>
+    <select id="selectLongitudeEnd" resultType="com.CarAccident.vo.RoadriskindexVO">
+    select substring_index(longitudeEnd, " ", -1) as longitudeEnd from (
+        select
+            distinct substring_index(line_string, " ", 3) as longitudeEnd
+        from roadriskindex
+    where highway like #{highway} and anals_grd like #{grade} and highway_section like #{highway_section}
+    )a
+    </select>
 </mapper>

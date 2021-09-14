@@ -1,27 +1,38 @@
-.container {text-align: center;}
-.container > div {display: inline-block; vertical-align: top; font-size: 16px;}
-
-
-.left_menu a {display: block;margin-top: 20px;}
-
-#logo {font-family: "Roboto", sans-serif; color: #333; font-weight: 700;
-    font-size: 24px; text-decoration: none; text-align: center;
-    padding: 20px 0; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 5px; 
+.left_menu a {overflow: hidden; width: 100%; padding: 20px 20px 0 20px;
+    border-radius: 3px solid #333; position: relative; margin-top: 20px; 
 }
 
-ul li {list-style-type: none; float:left; margin-left: 5px;}
-
-.main_menu a {
-    overflow: hidden;
-    font-size: 15px; font-family: "Roboto", sans-serif; text-decoration: none; background-color: #fff;
-    color: #333; font-weight: 500; padding: 15px; margin-bottom: 15px;
-    border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+#logo {font-family: "Roboto", sans-serif; font-weight: 700;
+    font-size: 50px;  text-align: center;
+    padding: 20px 0; position: absolute; margin: auto; margin-top: 20px;
 }
 
-.main_menu a span {font-size: 13px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;}
-
-.dashboard_area {width: 800px; height: 900px; margin-left: 30px;}
-.content_left { width:1080px; height: 900px ; margin: center;
-    position: absolute; top: 0; display: inline-block; text-align: center;
+ul {
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
+li { 
+    display: inline;
+    float: left; margin: auto;  width: 23%; /* 메뉴바 중간*/ padding-top: 100px;
+    
+}
+li a {
+    text-align: center; display:inline-block;  
+    /* text-decoration:burlywood; font-size: 24px;*/
+    text-decoration: none; 
+    color: #333; padding: 0 15px; display: inline-block;
+}
+li a span {display: block;}
+
+li a:hover {background-color:beige; text-decoration: none;}
+/* .main_menu ul li {
+    float:left;  width: 20%; height: 50px; line-height: 50px; text-align: center; background-color: #98e0ad;
+} */
+
+.header_top b {color: #fff; text-align: center; line-height: 42px;}
+img {
+    overflow: hidden; margin: 0 auto; object-fit: cover; padding-top: 5px;
+}
+.header_top .container {position: absolute; right: 0; top: 0;}

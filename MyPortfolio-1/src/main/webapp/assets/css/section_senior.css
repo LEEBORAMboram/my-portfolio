@@ -17,7 +17,7 @@
     padding:20px;
 } */
 
-.jaywalking_information tbody tr:nth-child(2n+1) {background-color: #f3e3e3;}
+.senior_information tbody tr:nth-child(2n+1) {background-color:#f3e3e3;}
 
 .content_right td:first-child {width: 80%; text-align: center;
     padding:10px 0; border: 1px solid rgb(12, 5, 5); font-size: 20PX;
@@ -26,7 +26,7 @@
     padding:10px 0; border: 1px solid rgb(12, 5, 5); font-size: 20PX;
 }
 .content_map {margin-right: 10px;}
-.jaywalking_accident thead td {background-color: #999; color: #fff;}
+.senior_accident thead td {background-color: #999; color: #fff;}
 
 .real_construction {background-color: #fff; font-size: 15px;}
 
@@ -38,11 +38,13 @@
 /* .content_right {display: none;}
 .real_construction .active {display: table-row-group;} */
 
-.jaywalking_accident {display: none;}
-.jaywalking_accident.active {display: table-row-group;} 
+.senior_accident {display: none;}
+.senior_accident.active {display: table-row-group;} 
 
 /* .content_head a {
     font-size: 16px; font-family: "Noto Sans KR", sans-serif; font-weight: 300;
  }
  li a span {display: block;} */
+ 
  li a:hover {background-color: #00ffff; text-decoration: none;}
+ 

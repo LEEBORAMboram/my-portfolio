@@ -1,0 +1,88 @@
+.dashboard_area {
+    width: 100%; height: 100%; margin: 0 ; padding: 100px;}
+ 
+.col-3 {margin-top: 170px;}
+/* 찾기 버튼 및 검색*/
+select {
+    width: 15%;
+    padding: 20px;
+    border: 1px solid #999;
+    font-family: inherit;
+    border-radius: 10px;
+    margin-left: 20%;
+    margin-top: 30px;
+}
+
+select:hover {
+    background-color: #fff;
+}
+
+select:focus {
+    border-color: #aaa;
+    outline: none;
+}
+
+input {
+    margin-left: 60%;
+    margin-right: auto;
+    margin: 0px auto;
+    height: 55px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+button {
+    height: 55px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+button a {
+    font-family: "Roboto", sans-serif;
+    font-size: 50px;
+}
+
+/* 표*/
+.content_information {width: 510px; height: 200px; margin-left: 20px;
+    font-family: "Noto Sans KR", sans-serif;}
+.content_information td:first-child {width: 80%; text-align: center;
+    padding:10px 0; border: 1px solid #eee; ;
+}
+.content_information td:last-child {width: 20%; text-align: center;
+    padding:10px 0; border: 1px solid #eee;
+}
+
+/*페이징*/
+.content_right {margin-top: 20px;}
+table .content_right {
+    text-align: center;
+}
+.real_information_tbl {font-size: 25px; width: 80%; height: 50px; font-family: "Noto Sans KR", sans-serif; margin-left: auto; margin-right: auto;}
+.real_information_tbl thead td {text-align: center; width: 20%;
+    padding: 10px 0; border: 1px solid #333;
+}
+.real_information_tbl thead td:nth-child(2){width: 40%;}
+/* .real_construction {background-color: #fff; font-size: 15px; width: 25%;} */
+
+.real_information_tbl thead td {background-color: #999; color: #fff;}
+.real_informationreal_information tbody td {font-family: "Noto Sans KR", sans-serif; font-size: 20px;}
+.real_informationreal_information tbody td:nth-child(2) {color: rgb(255, 60, 60);}
+
+.real_information tbody td {font-family: "Noto Sans KR", sans-serif; font-size: 20px;}
+.real_information tbody td:nth-child(2) {color: rgb(255, 60, 60);}
+/* 페이징
+.real_traffic_pager_area{font-size: 12px; text-align: center; margin-top: 10px;}
+
+.real_traffic_pager_area .current{font-weight: 700;} */
+
+.content_left{width: 200%; font-family: "Noto Sans KR", sans-serif;}
+
+.real_information_tbl tbody td {font-size: 20px;}
+.real_information_tbl.active {display: table-row-group;}
+
+.live_confirm_area {overflow-y: scroll;}
