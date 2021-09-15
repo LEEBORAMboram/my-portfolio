@@ -8,7 +8,7 @@ $(function () {
     // });
     $("#search_btn1").change(function () {
         //let region = $("#search_btn1").find("option:selected").val();
-        searchContent(region);
+        searchContent();
         
     });
     // $("#search_btn1 option:first-child").prop("selected", false);
@@ -25,8 +25,8 @@ $(function () {
 
     function getCityRegions() {
 
-        // $(".search_btn1").prop("disabled", false);
-        // $(".search_btn1").html("");
+        $(".search_btn1").prop("disabled", false);
+        $(".search_btn1").html("");
 
         $.ajax({
             type: "get",
@@ -42,17 +42,16 @@ $(function () {
         })
     }
     function searchContent(search) {
-        // 검색
-        //console.log(search)
+
         let keyword = $("#search_keyword").val();
         if (keyword == undefined || keyword == null) keyword="";
-        console.log(search);
+        //console.log(search);
 
         $.ajax({
             type: "get",
-            url: "/api/contentRealInfo?search="+search,
+            url: "/api/contentRealInfo?search=" + search,
             success: function (r) {
-                console.log(r);
+                //console.log(r);
 
                 //let dt = new Array();
                 let address = new Array();

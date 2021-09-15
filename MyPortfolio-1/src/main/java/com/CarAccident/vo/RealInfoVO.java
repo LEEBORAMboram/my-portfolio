@@ -18,5 +18,7 @@ public class RealInfoVO {
     private String type;
     private String search;
 
-    private String diff;
+    private String region;
+    private String spot;
+    // private String diff;
 }

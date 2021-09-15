@@ -1,7 +1,7 @@
 package com.CarAccident.vo;
 
 import lombok.Data;
-
+ 
 @Data
 public class Section_bicycleVO {
     private Integer seq;

@@ -21,12 +21,12 @@
             <div class="col-3">
                 <select id="search_btn1">
                     <option value="limited_area"></option>
-                    <c:forEach items="${search_btn1}" var="search" varStatus="status">
+                    <!-- <c:forEach items="${search_btn1}" var="search" varStatus="status">
                         <option value="${search.mcbscode}">${search.mchgname}</option>
-                    </c:forEach>
+                    </c:forEach> -->
                 </selec>
                 <div class="search_btn3">
-                    <input type="text" id="search_keyword" placeholder="지역명을 입력해주세요.">
+                    <input type="text" id="search_keyword" placeholder="구와 동 을 입력해주세요.">
                     <!-- <button class="search_btn2" type="button">search</button>     -->
                     <!-- <input type="text" placeholder="지역명을 입력해주세요." id="search_keyword" style="display:none";> -->
                     <!-- <input type="buttpn" onclick="getSearchList()" class="btn btn-outline-primary mr-2" value="검색"> -->

@@ -20,7 +20,7 @@ $(function(){
                     data:{
                         labels:sidoArr,
                         datasets:[{
-                            label:"지역별 교통사고 건 수",
+                            label:"지역별 교통사고 건 수 (최근 4년간)",
                             data: accChart,
                             backgroundColor:['rgba(30, 20, 205, 0.5)']
                         }
@@ -50,7 +50,7 @@ $(function(){
                     data:{
                         labels:sidoArr,
                         datasets:[{
-                            label:"지역별 교통사고 사망자 수",
+                            label:"지역별 교통사고 사망자 수 (최근 4년간)",
                             data: deathArr,
                             backgroundColor:['rgba(255, 30, 30, 0.7)']
                         }
@@ -80,7 +80,7 @@ $(function(){
                     data:{
                         labels:sidoArr,
                         datasets:[{
-                            label:"지역별 교통사고 부상자 수",
+                            label:"지역별 교통사고 부상자 수 (최근 4년간)",
                             data: injuredArr,
                             backgroundColor:['rgba(30, 30, 255, 0.5)']
                         }

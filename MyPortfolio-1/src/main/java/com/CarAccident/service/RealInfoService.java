@@ -18,8 +18,8 @@ public class RealInfoService {
     public void insertRealInfo(RealInfoVO vo) {
         mapper.insertRealInfo(vo);
     }
-    public List<RealInfoVO> selectRealtime(String region) {
-        return mapper.selectRealtime(region);
+    public List<RealInfoVO> selectRealtime(String spot) {
+        return mapper.selectRealtime(spot);
     }
     public List<String> selectRegionNameCategory() {
         return mapper.selectRegionNameCategory();
@@ -42,7 +42,7 @@ public class RealInfoService {
 
     //     return mapper.selectrealSigungu(dt);
     // }
-    public List<RealInfoVO> selectrealSigungu(String search) {
-        return mapper.selectrealSigungu(search);
+    public List<RealInfoVO> selectrealSigungu(String sigungu) {
+        return mapper.selectrealSigungu(sigungu);
     }
 }
