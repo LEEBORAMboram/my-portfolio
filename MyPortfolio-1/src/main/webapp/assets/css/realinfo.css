@@ -1,16 +1,18 @@
 .dashboard_area {
     width: 100%; height: 100%; margin: 0 ; padding: 100px;}
  
-.col-3 {margin-top: 170px;}
+.col-3 {margin-top: 170px; margin-right:20px;}
+
 /* 찾기 버튼 및 검색*/
 select {
-    width: 15%;
+    width: 10%;
     padding: 20px;
     border: 1px solid #999;
     font-family: inherit;
     border-radius: 10px;
-    margin-left: 20%;
+    margin-left: 300px;
     margin-top: 30px;
+    
 }
 
 select:hover {
@@ -49,7 +51,7 @@ button a {
 
 /* 표*/
 .content_information {width: 510px; height: 200px; margin-left: 20px;
-    font-family: "Noto Sans KR", sans-serif;}
+    font-family: "Noto Sans KR", sans-serif; text-align: center;}
 .content_information td:first-child {width: 80%; text-align: center;
     padding:10px 0; border: 1px solid #eee; ;
 }
@@ -69,7 +71,7 @@ table .content_right {
 .real_information_tbl thead td:nth-child(2){width: 40%;}
 /* .real_construction {background-color: #fff; font-size: 15px; width: 25%;} */
 
-.real_information_tbl thead td {background-color: #999; color: #fff;}
+.real_information_tbl thead td {background-color: rgb(23, 81, 189); color: #fff;}
 .real_informationreal_information tbody td {font-family: "Noto Sans KR", sans-serif; font-size: 20px;}
 .real_informationreal_information tbody td:nth-child(2) {color: rgb(255, 60, 60);}
 

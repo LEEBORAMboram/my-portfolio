@@ -20,9 +20,9 @@
         <%@include file="/WEB-INF/views/includes/menu.jsp"%>
         <div class="dashboard_content">
                 <div class="content_left">
-                    <p> 주변인 중 꼭 몇 명은 목숨을 잃은 사람이 있을 정도로 매우 흔한 사망 원인인 교통사고.
+                    <p> 
                         미국에서는 20세기에서 치른 전쟁에서의 전사자보다 많은 수의 사람들이 교통사고로 사망한다고 한다.
-                        누구에게나 발생할 수 있는 만큼 경각심을 가지고 주의를 기울여야 한다.
+                        이렇게 흔히 발생하는 만큼 경각심을 가지고 주의를 기울여야 한다.
                     </p>
                 </div>
                 <div style="width: 340p; height: 170px; float: right; margin-top:70px; padding-top: 10px; margin-right: 200px;">
@@ -38,9 +38,9 @@
             </div>
             <div class="content_right2">
                 <!-- <h1>사망자 수</h1> -->
-                <canvas id="accDeathChart" style="width: 45%; height: 100%; float: left; padding-top: 100px; margin-top:150px; margin-left: 40px;"></canvas>
+                <canvas id="accDeathChart" style="width: 45%; height: 100%; float: left; padding-top: 100px; margin-top:200px; margin-left: 40px;"></canvas>
                 <!-- <h1>부상자 수</h1> -->
-                <canvas id="injuredChart" style="width: 45%; height: 100%;  float: right; padding-top: 100px; margin-top:150px; margin-right: 40px;"></canvas>
+                <canvas id="injuredChart" style="width: 45%; height: 100%;  float: right; padding-top: 100px; margin-top:200px; margin-right: 40px;"></canvas>
             </div>
         </div>
     </div>
