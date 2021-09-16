@@ -38,9 +38,9 @@
             </div>
             <div class="content_right2">
                 <!-- <h1>사망자 수</h1> -->
-                <canvas id="accDeathChart" style="width: 45%; height: 100%; float: left; padding-top: 100px; margin-top:150px; margin-left: 40px;"></canvas>
+                <canvas id="accDeathChart" style="width: 45%; height: 100%; float: left; padding-top: 100px; margin-top:200px; margin-left: 40px;"></canvas>
                 <!-- <h1>부상자 수</h1> -->
-                <canvas id="injuredChart" style="width: 45%; height: 100%;  float: right; padding-top: 100px; margin-top:150px; margin-right: 40px;"></canvas>
+                <canvas id="injuredChart" style="width: 45%; height: 100%;  float: right; padding-top: 100px; margin-top:200px; margin-right: 40px;"></canvas>
             </div>
         </div>
     </div>
